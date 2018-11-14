@@ -28,4 +28,4 @@ const C_UserSchema = new Schema ({
 })
 
 
-module.exports = C_User = mongoose.model('c-users',C_UserSchema);
+module.exports = C_User = mongoose.model('companies',C_UserSchema);

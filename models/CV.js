@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 
-const S_ProfileSchema = new Schema({
+const CVSchema = new Schema({
     user:{
         type: Schema.Types.ObjectId,
-        ref:'s-users'
+        ref:'students'
     },
     handle:{
         type: String,
@@ -99,6 +99,29 @@ const S_ProfileSchema = new Schema({
 
         }
     ],
+    projects:
+    [
+        { 
+            title: {
+                type : String,
+                 required: true
+            },
+            from :{
+                type:Date,
+                required: true
+            },
+            to:{
+                type:Date
+            },
+            current:{
+                type:Boolean,
+                default:false
+            },
+            description:{
+                type:String
+            } 
+        }
+    ],
     social:{
         youtube :{
             type:String
@@ -125,4 +148,9 @@ const S_ProfileSchema = new Schema({
 });
 
 
-module.exports = S_Profile = mongoose.model('s-profile',S_ProfileSchema);
+module.exports = CV = mongoose.model('cvs',CVSchema);
+
+
+
+
+

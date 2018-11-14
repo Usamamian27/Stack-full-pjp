@@ -3,11 +3,10 @@ const mongoose = require('mongoose');
 const bodyParser =require('body-parser');
 const passport = require('passport');
 
-const s_user = require('./routes/api/student/s-user');
-const s_profile = require('./routes/api/student/s-profile');
-
-const c_user = require('./routes/api/company/c-user');
-//const c_profile = require('./routes/api/company/c-profile');
+const students = require('./routes/api/student/students');
+const cv = require('./routes/api/student/cv');
+const company = require('./routes/api/company/companies');
+const portfolio = require('./routes/api/company/portfolio');
 
 // Initialize App
 const app = express();
@@ -23,7 +22,7 @@ const db = require('./Config/keys').mongoURI;
 
 // Connect to mongoDB
 mongoose
-.connect(db)
+.connect(db,{ useNewUrlParser: true })
     .then(()=>{
         console.log('Connection to MongoDB :  Succesful');
     })
@@ -39,10 +38,10 @@ require('./config/passport')(passport);
 
 
 // Use Routes
-app.use('/api/student/s-user',s_user);
-app.use('/api/student/s-profile',s_profile);
-app.use('/api/company/c-user',c_user);
-//app.use('/api/company/c-profile',c_profile);
+app.use('/api/student/students',students);
+app.use('/api/student/cv',cv);
+app.use('/api/company/companies',company);
+app.use('/api/company/portfolio',portfolio);
 
 
 

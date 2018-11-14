@@ -6,8 +6,8 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../../Config/keys');
 const passport = require('passport');
 
-// Load Student model
-const Student = require('../../../models/S-User');
+// Load Company model
+const Company = require('../../../models/Company');
 
 // Load Input validations
 const validateRegisterInput = require ('../../../validations/register');
@@ -16,11 +16,11 @@ const validateLoginInput = require('../../../validations/login');
 // route Get api/users/test
 router.get('/test',(req,res)=>{
 
-    res.json({msg: "Users Works"});
+    res.json({msg: "Company User Works"});
 });
 
-// Route Post api/student/s-user
-// desc register student
+// Route Post api/Company/c-user
+// desc register company
 //access public
 router.post('/register',(req,res)=>{
 
@@ -30,9 +30,9 @@ router.post('/register',(req,res)=>{
         return res.status(400).json(errors);
     }
 
-    Student.findOne({ email : req.body.email })
-        .then(user => {
-            if(user){
+    Company.findOne({ email : req.body.email })
+        .then(company => {
+            if(company){
                 return res.status(400).json({email:'Email Already Exists'});
             }
             else {
@@ -44,7 +44,7 @@ router.post('/register',(req,res)=>{
                     d:'mm'   // Default
                 });
 
-                const newStudent = new Student({
+                const newCompany = new Company({
                     name : req.body.name,
                     email:req.body.email,
                     avatar:avatar,
@@ -52,12 +52,12 @@ router.post('/register',(req,res)=>{
                 });
 
                 bcrypt.genSalt(10,(err,salt)=>{
-                    bcrypt.hash(newStudent.password,salt,(err,hash)=>{
+                    bcrypt.hash(newCompany.password,salt,(err,hash)=>{
 
                         if(err) throw  err;
-                        newStudent.password =hash;
-                        newStudent.save()
-                            .then(user => res.json(user))
+                        newCompany.password =hash;
+                        newCompany.save()
+                            .then(company => res.json(company))
                             .catch(err => console.log(err));
                     })
                 })
@@ -67,15 +67,13 @@ router.post('/register',(req,res)=>{
 });
 
 // Route Get api/users/login
-//DESC Login User /returning JWT Token
+// DESC Login User /returning JWT Token
 // Public
 
 router.post('/login',(req,res)=>{
-
+    
     const {errors , isValid} = validateLoginInput(req.body);
-
     // Check  Validations
-
     if(!isValid){
         return res.status(400).json(errors);
     }
@@ -83,27 +81,27 @@ router.post('/login',(req,res)=>{
     const email = req.body.email;
     const password = req.body.password;
 
-    // Find user by Email
-    Student.findOne({email: email })
-        .then(user => {
-            // Check for user
-            if (!user){
-                return res.status(404).json({email:'User Not Found'});
+    // Find company by Email
+    Company.findOne({email: email })
+        .then(company => {
+            // Check for company
+            if (!company){
+                return res.status(404).json({email:'company Not Found'});
             }
             // Check  password
-            bcrypt.compare(password,user.password)
+            bcrypt.compare(password,company.password)
                 .then(isMatch=> {
                     if (isMatch) {
-                        // User matched
+                        //company matched
                         // Creating Jwt payload
-                        const payload ={
-                            id: user.id,
-                            name: user.name,
-                            avatar: user.avatar
+                        const payload_c ={
+                            id:company.id,
+                            name:company.name,
+                            avatar:company.avatar
                         };
                         // sign token
                         jwt.sign(
-                            payload,
+                            payload_c,
                             keys.secretOrKey,
                             {expiresIn: 8.64e+7},
                             (err,token)=>{
@@ -120,10 +118,10 @@ router.post('/login',(req,res)=>{
         })
 });
 
-// Route Get api/users/current
-// desc return current user
-//access private
-router.get('/current',passport.authenticate('Student', { session : false}),(req,res)=>{
+// Route Get api/companys/current
+// desc return current company
+// access private
+router.get('/current',passport.authenticate('Company', { session : false}),(req,res)=>{
     
     // sending only specific fields of our choice
     res.json({
@@ -133,4 +131,5 @@ router.get('/current',passport.authenticate('Student', { session : false}),(req,
     });
 }
 );
+
 module.exports = router;
