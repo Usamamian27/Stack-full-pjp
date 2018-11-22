@@ -49,11 +49,7 @@ router.post('/register',(req,res)=>{
                     email:req.body.email,
                     avatar:avatar,
                     password:req.body.password,
-                    cnic:req.body.cnic,
-                    DOB:req.body.DOB,
-                    roll:req.body.roll,
-                    phone:req.body.phone,
-                    address:req.body.address
+
 
                 });
 
@@ -130,7 +126,7 @@ router.post('/login',(req,res)=>{
 // desc return current user
 //access private
 router.get('/current',passport.authenticate('Student', { session : false}),(req,res)=>{
-    
+
     // sending only specific fields of our choice
     res.json({
         id:req.user.id,

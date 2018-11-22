@@ -73,6 +73,16 @@ router.post('/',passport.authenticate(
         if (req.body.status) profileFields.status = req.body.status;
         if (req.body.githubusername)
             profileFields.githubusername = req.body.githubusername;
+
+        if (req.body.cnic) profileFields.cnic = req.body.cnic;
+        if (req.body.DOB) profileFields.DOB = req.body.DOB;
+        if (req.body.roll) profileFields.roll = req.body.roll;
+        if (req.body.phone) profileFields.phone = req.body.phone;
+
+        profileFields.address = {};
+        if (req.body.city) profileFields.address.city = req.body.city;
+        if (req.body.country) profileFields.address.country = req.body.country;
+
         // Skills - Spilt into array
         if (typeof req.body.skills !== 'undefined') {
             profileFields.skills = req.body.skills.split(',');
@@ -329,7 +339,7 @@ router.delete ('/education/:edu_id',passport.authenticate('Student',{session : f
 
         CV.findOne({user : req.user.id})
             .then(profile =>{
-                
+
                 // Get Remove index of Experiences
                 const removeIndex = profile.education
                     .map(item => item.id)
@@ -353,7 +363,7 @@ router.delete ('/project/:project_id',passport.authenticate('Student',{session :
 
         CV.findOne({user : req.user.id})
             .then(profile =>{
-                
+
                 // Get Remove index of Experiences
                 const removeIndex = profile.projects
                     .map(item => item.id)

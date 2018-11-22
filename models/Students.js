@@ -21,27 +21,6 @@ const StudentSchema = new Schema ({
     avatar :{
         type:String
     },
-    cnic:{
-        type: String,
-        required: true
-    },
-    DOB:{
-        type: Date,
-        default: Date.now
-    },
-    roll: {
-        type: String,
-        required:true
-    },
-    phone: {
-        type: String,
-        required:true
-    },
-
-    address: {
-        type: String,
-        required:true
-    },
 
     date :{
         type:String,

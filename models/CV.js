@@ -37,6 +37,27 @@ const CVSchema = new Schema({
     githubusername:{
         type:String
     },
+    cnic:{
+    type: String,
+    required: true
+},
+    DOB:{
+    type: Date,
+    default: Date.now
+},
+    roll: {
+    type: String,
+    required:true
+},
+    phone: {
+    type: String,
+    required:true
+},
+
+    address: {
+    type: String,
+    required:true
+},
     experience :[
         {
             title: {
@@ -101,7 +122,7 @@ const CVSchema = new Schema({
     ],
     projects:
     [
-        { 
+        {
             title: {
                 type : String,
                  required: true
@@ -119,7 +140,7 @@ const CVSchema = new Schema({
             },
             description:{
                 type:String
-            } 
+            }
         }
     ],
     social:{
