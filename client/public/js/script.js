@@ -55,6 +55,19 @@ $(document).on('ready',function(){
         $('.signin-popup-box').fadeOut('fast');
         $('html').removeClass('no-scroll');
     });
+    // Close popup on login button
+    $('.signin-close-popup').on('click', function(){
+        if( $('#login-email').val()== '' || $('#login-password').val()== ''){
+        }
+        else {
+            $('.signin-popup-box').fadeOut('fast');
+            $('html').removeClass('no-scroll');
+        }
+    });
+
+
+
+
     /* Signup Popup */
     $('.signup-popup').on('click', function(){
         $('.signup-popup-box').fadeIn('fast');
@@ -65,7 +78,7 @@ $(document).on('ready',function(){
         $('html').removeClass('no-scroll');
     });
     $('.aclose-popup').on('click', function(){
-        if($('#signup-username').val() == '' || $('signup-email').val()== '' || $('signup-password').val()== ''  || $('signup-password2').val() == '' ){
+        if($('#signup-username').val() == '' || $('#signup-email').val()== '' || $('#signup-password').val()== ''  || $('#signup-password2').val() == '' ){
         }
         else {
             $('.signup-popup-box').fadeOut('fast');

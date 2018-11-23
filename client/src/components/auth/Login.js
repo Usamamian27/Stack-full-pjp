@@ -1,7 +1,45 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import classnames from 'classnames';
+import {loginStudent} from '../../actions/authActions';
+
 
 class Login extends Component {
+
+    state ={
+        email:'',
+        password:'',
+        errors:{}
+    };
+
+    onChange = (e)=>{
+        this.setState({[e.target.name ] : e.target.value});
+    };
+    onSubmit =(e) =>{
+        e.preventDefault();
+
+        const userData = {
+            email: this.state.email,
+            password: this.state.password,
+        };
+        this.props.loginStudent(userData);
+    };
+    componentWillReceiveProps(nextProps){
+        if(nextProps.auth.isAuthenticated){
+            // this.props.history.replace('/dashboard');
+        }
+
+        if(nextProps.errors){
+            this.setState({errors : nextProps.errors});
+        }
+    }
+
+
+
     render() {
+
+        const {errors} = this.state;
+
         return (
             <div className="account-popup-area signin-popup-box">
                 <div className="account-popup">
@@ -12,32 +50,52 @@ class Login extends Component {
                         <span>Candidate</span>
                         <span>Employer</span>
                     </div>
-                    <form>
+                    <form onSubmit={this.onSubmit}>
                         <div className="cfield">
-                            <input type="text" placeholder="Username"/>
+                            <input
+                                id="login-email"
+                                type="email"
+                                placeholder="Email"
+                                name="email"
+                                value={this.state.email}
+                                onChange={this.onChange}
+                                className={classnames('form-control form-control-lg',{
+                                    'is-invalid' : errors.email
+                                })}
+                            />
                             <i className="la la-user"></i>
+                            {errors.email && (<div className="invalid-feedback">
+                                {errors.email}
+                            </div>)}
                         </div>
                         <div className="cfield">
-                            <input type="password" placeholder="********"/>
+                            <input
+                                id="login-password"
+                                type="password"
+                                placeholder="********"
+                                name="password"
+                                value={this.state.password}
+                                onChange={this.onChange}
+                                className={classnames('form-control form-control-lg',{
+                                    'is-invalid' : errors.password
+                                })}
+                            />
                             <i className="la la-key"></i>
+                            {errors.password && (<div className="invalid-feedback">
+                                {errors.password}
+                            </div>)}
                         </div>
-                        <p className="remember-label">
-                            <input type="checkbox" name="cb" id="cb1"/><label htmlFor="cb1">Remember me</label>
-                        </p>
-                        <a href="#" title="">Forgot Password?</a>
-                        <button type="submit">Login</button>
+                        <button className="signin-close-popup" type="submit">Login</button>
                     </form>
-                    <div className="extra-login">
-                        <span>Or</span>
-                        <div className="login-social">
-                            <a className="fb-login" href="#" title=""><i className="fa fa-facebook"></i></a>
-                            <a className="tw-login" href="#" title=""><i className="fa fa-twitter"></i></a>
-                        </div>
-                    </div>
                 </div>
             </div>
         );
     }
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+    auth : state.auth,
+    errors:state.errors
+});
+
+export default connect(mapStateToProps,{loginStudent})(Login);
