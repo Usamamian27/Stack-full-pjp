@@ -21,12 +21,11 @@ const StudentSchema = new Schema ({
     avatar :{
         type:String
     },
-
     date :{
         type:String,
         default:Date.now
     }
-})
+});
 
 
 module.exports = Students = mongoose.model('students',StudentSchema);

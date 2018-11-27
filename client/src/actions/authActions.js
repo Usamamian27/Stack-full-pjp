@@ -44,4 +44,19 @@ export const setCurrentUser = (decoded) =>{
         type:SET_CURRENT_USER,
         payload:decoded
     }
-}
+};
+
+
+// Log User out
+export const logOutUser = () => dispatch => {
+
+    //Remove token from localstorage
+    localStorage.removeItem('Student');
+
+    // Remove auth header for future requests
+    setAuthToken(false);
+    // set current user to empty {} which will set isAuthenticated to false
+    dispatch(setCurrentUser({}));
+
+
+};

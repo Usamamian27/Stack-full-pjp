@@ -38,26 +38,47 @@ const CVSchema = new Schema({
         type:String
     },
     cnic:{
-    type: String,
-    required: true
-},
+        type: String,
+        required: true
+    },
     DOB:{
-    type: Date,
-    default: Date.now
-},
+        type: Date,
+        default: Date.now
+    },
     roll: {
-    type: String,
-    required:true
-},
+        type: String,
+        required:true
+    },
     phone: {
-    type: String,
-    required:true
-},
-
+        type: String,
+        required:true
+    },
     address: {
-    type: String,
-    required:true
-},
+        type: String,
+        required:true
+    },
+    social:{
+        youtube :{
+            type:String
+        },
+        twitter :{
+            type:String
+        },
+        facebook :{
+            type:String
+        },
+        linkedin :{
+            type:String
+        },
+        instagram :{
+            type:String
+        },
+        date:{
+            type:Date,
+            default:Date.now
+        }
+
+    },
     experience :[
         {
             title: {
@@ -88,7 +109,6 @@ const CVSchema = new Schema({
 
         }
     ],
-
     education :[
         {
             school: {
@@ -142,29 +162,8 @@ const CVSchema = new Schema({
                 type:String
             }
         }
-    ],
-    social:{
-        youtube :{
-            type:String
-        },
-        twitter :{
-            type:String
-        },
-        facebook :{
-            type:String
-        },
-        linkedin :{
-            type:String
-        },
-        instagram :{
-            type:String
-        },
-        date:{
-            type:Date,
-            default:Date.now
-        }
+    ]
 
-    }
 
 });
 

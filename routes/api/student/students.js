@@ -44,12 +44,13 @@ router.post('/register',(req,res)=>{
                     d:'mm'   // Default
                 });
 
+
+
                 const newStudent = new Student({
                     name : req.body.name,
                     email:req.body.email,
                     avatar:avatar,
                     password:req.body.password,
-
 
                 });
 

@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import classnames from 'classnames';
 import {withRouter} from 'react-router-dom';
 import {registerStudent} from "../../actions/authActions";
-
+import TextFieldGroup from '../common/TextFieldGroup';
 class Register extends Component {
     state ={
         name:'',
@@ -36,97 +35,69 @@ class Register extends Component {
     };
 
     render() {
-        const {errors} = this.state;
+
+        const { errors } = this.state;
         return (
-                <div className="account-popup-area signup-popup-box">
-                    <div  className="account-popup">
-                        <span className="close-popup">
-                            <i className="la la-close"></i>
-                        </span>
-                        <h3>Sign Up</h3>
-                        <div className="select-user">
-                            <span>Candidate</span>
-                            <span>Employer</span>
-                        </div>
-                        <form onSubmit={this.onSubmit}>
-                            <div className="cfield">
-                                <input
-                                    id="signup-username"
+            <div className="register">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-8 m-auto">
+                            <h1 className="display-4 text-center">
+                                Sign Up
+                            </h1>
+                            <p className="lead text-center">
+                                Create your DevConnector account
+                            </p>
+                            <form onSubmit={this.onSubmit}>
+                                <TextFieldGroup
                                     type="text"
-                                    placeholder="Username"
+                                    placeholder="Name"
                                     name="name"
                                     value={this.state.name}
                                     onChange={this.onChange}
-                                    //error={errors.name}
-                                    className={classnames('form-control form-control-lg',{
-                                        'is-invalid' : errors.name
-                                    })}
+                                    error={errors.name}
 
                                 />
-                                <i className="la la-user"></i>
-                                {errors.name && (<div className="invalid-feedback">
-                                    {errors.name}
-                                </div>)}
-                            </div>
 
-                            <div className="cfield">
-                                <input
-                                    id="signup-email"
-                                    type="text"
-                                       placeholder="Email"
-                                       name="email"
-                                       value={this.state.email}
-                                       onChange={this.onChange}
-                                    className={classnames('form-control form-control-lg',{
-                                        'is-invalid' : errors.email
-                                    })}
+
+                                <TextFieldGroup
+                                    type="email"
+                                    placeholder="Email Address"
+                                    name="email"
+                                    value={this.state.email}
+                                    onChange={this.onChange}
+                                    error={errors.email}
+                                    info="This site uses gravatar so if u want a profile img use gravatar profile"
+
 
                                 />
-                                <i className="la la-envelope-o"></i>
-                                {errors.email && (<div className="invalid-feedback">
-                                    {errors.email}
-                                </div>)}
-                            </div>
-                            <div className="cfield">
-                                <input
-                                    id="signup-password"
+
+                                <TextFieldGroup
                                     type="password"
-                                       placeholder="Password"
-                                       name="password"
-                                       value={this.state.password}
-                                       onChange={this.onChange}
-                                    className={classnames('form-control form-control-lg',{
-                                        'is-invalid' : errors.password
-                                    })}
+                                    placeholder="Password"
+                                    name="password"
+                                    value={this.state.password}
+                                    onChange={this.onChange}
+                                    error={errors.password}
                                 />
-                                <i className="la la-key"></i>
-                                {errors.password && (<div className="invalid-feedback">
-                                    {errors.password}
-                                </div>)}
-                            </div>
-                            <div className="cfield">
-                                <input
-                                    id="signup-password2"
+
+                                <TextFieldGroup
                                     type="password"
                                     placeholder="Confirm Password"
                                     name="password2"
-                                       value={this.state.password2}
-                                       onChange={this.onChange}
-                                    className={classnames('form-control form-control-lg',{
-                                        'is-invalid' : errors.password2
-                                    })}
+                                    value={this.state.password2}
+                                    onChange={this.onChange}
+                                    error={errors.password2}
                                 />
-                                <i className="la la-key"></i>
-                                {errors.password2 && (<div className="invalid-feedback">
-                                    {errors.password2}
-                                </div>)}
-                            </div>
 
-                            <button className="aclose-popup"
-                           type="submit">SignUp</button>
-                        </form>
+                                <input type="submit"
+                                       className="btn btn-info btn-block mt-4"
+                                />
+                            </form>
+                        </div>
                     </div>
                 </div>
+            </div>
         );
     }
 }

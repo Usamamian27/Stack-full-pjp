@@ -1,172 +1,104 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-
+import {connect} from 'react-redux';
+import {logOutUser} from "../../actions/authActions";
+import {clearCurrentProfile} from "../../actions/profileAcions";
 
 class Header extends Component {
 
+    onLogoutClick = (e) =>{
+        e.preventDefault();
+        this.props.clearCurrentProfile();
+        this.props.logOutUser();
+    };
+
+
     render() {
+
+        const {isAuthenticated , user} = this.props.auth;
+        const authLinks = (
+            <ul className="navbar-nav ml-auto">
+
+                <li className="nav-item">
+                    <Link className="nav-link" to="/feed">
+                        News Feed
+                    </Link>
+                </li>
+
+                <li className="nav-item">
+                    <Link className="nav-link" to="/dashboard">
+                        Dashboard
+                    </Link>
+                </li>
+
+
+                <li className="nav-item">
+                    <a href="#"
+                       className="nav-link"
+                       onClick={this.onLogoutClick}>
+
+                        <img className="rounded-circle"
+                             src={user.avatar} alt={user.name}
+                             style={{width:'25px' , marginRight:'5px'}}
+                             title="you must have a gravatar connected to your email"
+                        />
+                        {' '}
+                        <Link to="/login">
+                            Logout
+                        </Link>
+                    </a>
+                </li>
+            </ul>
+        );
+
+        const guestLinks = (
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                    <Link className="nav-link" to="/register">
+                        Sign Up
+                    </Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/login">
+                        Login
+                    </Link>
+                </li>
+            </ul>
+        );
+
+
         return (
-            <header className="style4">
-                <div className="topbar">
-                    <div className="container">
-                        <ul className="h-social">
-                            {/*<li><Link to="" title=""><i className="fa fa-facebook"></i></Link></li>*/}
-                            {/*<li><Link to="" title=""><i className="fa fa-twitter"></i></Link></li>*/}
-                            {/*<li><Link to="" title=""><i className="fa fa-linkedin"></i></Link></li>*/}
-                            {/*<li><Link to="" title=""><i className="fa fa-pinterest"></i></Link></li>*/}
-                            {/*<li><Link to="" title=""><i className="fa fa-behance"></i></Link></li>*/}
+            <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+                <div className="container">
+                    <Link className="navbar-brand" to="/">
+                        DevConnector
+                    </Link>
+                    <button className="navbar-toggler" type="button"
+                            data-toggle="collapse" data-target="#mobile-nav">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div className="collapse navbar-collapse" id="mobile-nav">
+                        <ul className="navbar-nav mr-auto">
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/profiles">
+                                    Developers
+                                </Link>
+                            </li>
                         </ul>
-                        <div className="h-contact">
-                            <span><i className="la la-phone"></i>Call us 0850 3256 98 65 </span>
-                            <span><i className="la la-envelope-o"></i>info@jobhunt.com </span>
-                        </div>
-                    </div>
-                </div>
-                <div className="menu-sec">
-                    <div className="container">
-                        <div className="logo">
-                            <Link to="/" title=""><img
-                                src="images/resource/logo6.png" alt=""/></Link>
-                        </div>
 
-                        <div className="btn-extars">
-                            <ul className="account-btns">
-                                <li className="signup-popup"><a  title="">Sign Up</a></li>
-                                <li className="signin-popup"><a title="">Login</a></li>
-                            </ul>
-                        </div>
+                        {isAuthenticated ? authLinks : guestLinks}
 
-                        <nav>
-                            <ul>
-                                <li className="menu-item-has-children">
-                                    <Link to="/" title="">Home</Link>
-                                </li>
-                                <li className="menu-item-has-children">
-                                    <a href="#" title="">Employers</a>
-                                    {/*<ul>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/employer_list1.html" title=""> Employer*/}
-                                            {/*List 1</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/employer_list2.html" title="">Employer*/}
-                                            {/*List 2</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/employer_list3.html" title="">Employer*/}
-                                            {/*List 3</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/employer_list4.html" title="">Employer*/}
-                                            {/*List 4</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/employer_single1.html" title="">Employer*/}
-                                            {/*Single 1</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/employer_single2.html" title="">Employer*/}
-                                            {/*Single 2</a></li>*/}
-                                        {/*<li className="menu-item-has-children">*/}
-                                            {/*<a href="#" title="">Employer Dashboard</a>*/}
-                                            {/*<ul>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/employer_manage_jobs.html"*/}
-                                                       {/*title="">Employer Job Manager</a></li>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/employer_packages.html" title="">Employer*/}
-                                                    {/*Packages</a></li>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/employer_post_new.html" title="">Employer*/}
-                                                    {/*Post New</a></li>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/employer_profile.html" title="">Employer*/}
-                                                    {/*Profile</a></li>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/employer_resume.html" title="">Employer*/}
-                                                    {/*Resume</a></li>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/employer_transactions.html"*/}
-                                                       {/*title="">Employer Transaction</a></li>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/employer_job_alert.html" title="">Employer*/}
-                                                    {/*Job Alert</a></li>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/employer_change_password.html"*/}
-                                                       {/*title="">Employer Change Password</a></li>*/}
-                                            {/*</ul>*/}
-                                        {/*</li>*/}
-                                    {/*</ul>*/}
-                                </li>
-                                <li className="menu-item-has-children">
-                                    <a href="#" title="">Candidates</a>
-                                    {/*<ul>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/candidates_list.html" title="">Candidates*/}
-                                            {/*List 1</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/candidates_list2.html" title="">Candidates*/}
-                                            {/*List 2</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/candidates_list3.html" title="">Candidates*/}
-                                            {/*List 3</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/candidates_single.html" title="">Candidates*/}
-                                            {/*Single 1</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/candidates_single2.html" title="">Candidates*/}
-                                            {/*Single 2</a></li>*/}
-                                        {/*<li className="menu-item-has-children">*/}
-                                            {/*<a href="#" title="">Candidates Dashboard</a>*/}
-                                            {/*<ul>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/candidates_my_resume.html"*/}
-                                                       {/*title="">Candidates Resume</a></li>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/candidates_my_resume_add_new.html"*/}
-                                                       {/*title="">Candidates Resume new</a></li>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/candidates_profile.html" title="">Candidates*/}
-                                                    {/*Profile</a></li>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/candidates_shortlist.html"*/}
-                                                       {/*title="">Candidates Shortlist</a></li>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/candidates_job_alert.html"*/}
-                                                       {/*title="">Candidates Job Alert</a></li>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/candidates_dashboard.html"*/}
-                                                       {/*title="">Candidates Dashboard</a></li>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/candidates_cv_cover_letter.html"*/}
-                                                       {/*title="">CV Cover Letter</a></li>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/candidates_change_password.html"*/}
-                                                       {/*title="">Change Password</a></li>*/}
-                                                {/*<li><a href="../../theme/jobhunt-html/candidates_applied_jobs.html"*/}
-                                                       {/*title="">Candidates Applied Jobs</a></li>*/}
-                                            {/*</ul>*/}
-                                        {/*</li>*/}
-                                    {/*</ul>*/}
-                                </li>
-                                <li className="menu-item-has-children">
-                                    <a href="#" title="">Blog</a>
-                                    {/*<ul>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/blog_list.html"> Blog List 1</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/blog_list2.html">Blog List 2</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/blog_list3.html">Blog List 3</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/blog_single.html">Blog Single</a></li>*/}
-                                    {/*</ul>*/}
-                                </li>
-                                <li className="menu-item-has-children">
-                                    <a href="#" title="">Job</a>
-                                    {/*<ul>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/job_list_classic.html">Job List*/}
-                                            {/*Classic</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/job_list_grid.html">Job List Grid</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/job_list_modern.html">Job List Modern</a>*/}
-                                        {/*</li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/job_single1.html">Job Single 1</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/job_single2.html">Job Single 2</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/job-single3.html">Job Single 3</a></li>*/}
-                                    {/*</ul>*/}
-                                </li>
-                                <li className="menu-item-has-children">
-                                    <a href="#" title="">Pages</a>
-                                    {/*<ul>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/about.html" title="">About Us</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/404.html" title="">404 Error</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/contact.html" title="">Contact Us 1</a>*/}
-                                        {/*</li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/contact2.html" title="">Contact Us 2</a>*/}
-                                        {/*</li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/faq.html" title="">FAQ's</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/how_it_works.html" title="">How it*/}
-                                            {/*works</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/login.html" title="">Login</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/pricing.html" title="">Pricing Plans</a>*/}
-                                        {/*</li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/register.html" title="">Register</a></li>*/}
-                                        {/*<li><a href="../../theme/jobhunt-html/terms_and_condition.html" title="">Terms &*/}
-                                            {/*Condition</a></li>*/}
-                                    {/*</ul>*/}
-                                </li>
-                            </ul>
-                        </nav>
 
                     </div>
                 </div>
-            </header>
-    )
+            </nav>
+        );
     }
 }
 
-export default Header;
+const mapStateToProps = (state) =>({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps,{logOutUser,clearCurrentProfile})(Header);

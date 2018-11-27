@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import classnames from 'classnames';
-import {loginStudent} from '../../actions/authActions';
+import {loginStudent} from "../../actions/authActions";
+
+// Bring in text field component
+import TextFieldGroup from '../common/TextFieldGroup';
+
 
 
 class Login extends Component {
@@ -15,6 +18,7 @@ class Login extends Component {
     onChange = (e)=>{
         this.setState({[e.target.name ] : e.target.value});
     };
+
     onSubmit =(e) =>{
         e.preventDefault();
 
@@ -24,9 +28,17 @@ class Login extends Component {
         };
         this.props.loginStudent(userData);
     };
+
+    componentDidMount (){
+        if(this.props.auth.isAuthenticated){
+            this.props.history.push('/dashboard');
+        }
+    }
+
     componentWillReceiveProps(nextProps){
+
         if(nextProps.auth.isAuthenticated){
-            // this.props.history.replace('/dashboard');
+            this.props.history.push('/dashboard');
         }
 
         if(nextProps.errors){
@@ -34,68 +46,60 @@ class Login extends Component {
         }
     }
 
-
-
     render() {
 
         const {errors} = this.state;
 
         return (
-            <div className="account-popup-area signin-popup-box">
-                <div className="account-popup">
-                    <span className="close-popup"><i className="la la-close"></i></span>
-                    <h3>User Login</h3>
-                    <span>Click To Login With Demo User</span>
-                    <div className="select-user">
-                        <span>Candidate</span>
-                        <span>Employer</span>
+            <div className="login">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-8 m-auto">
+                            <h1 className="display-4 text-center">
+                                Log In
+                            </h1>
+                            <p className="lead text-center">
+                                Sign in to your DevConnector account
+                            </p>
+
+                            <form onSubmit={this.onSubmit}>
+                                <TextFieldGroup
+                                    placeholder="Email Address"
+                                    name="email"
+                                    type="email"
+                                    value={this.state.email}
+                                    onChange={this.onChange}
+                                    error={errors.email}
+                                />
+
+                                <TextFieldGroup
+                                    type="password"
+                                    placeholder="Password"
+                                    name="password"
+                                    value={this.state.password}
+                                    onChange={this.onChange}
+                                    error={errors.password}
+                                />
+
+                                <input type="submit"
+                                       className="btn btn-info btn-block mt-4"
+                                />
+                            </form>
+                        </div>
                     </div>
-                    <form onSubmit={this.onSubmit}>
-                        <div className="cfield">
-                            <input
-                                id="login-email"
-                                type="email"
-                                placeholder="Email"
-                                name="email"
-                                value={this.state.email}
-                                onChange={this.onChange}
-                                className={classnames('form-control form-control-lg',{
-                                    'is-invalid' : errors.email
-                                })}
-                            />
-                            <i className="la la-user"></i>
-                            {errors.email && (<div className="invalid-feedback">
-                                {errors.email}
-                            </div>)}
-                        </div>
-                        <div className="cfield">
-                            <input
-                                id="login-password"
-                                type="password"
-                                placeholder="********"
-                                name="password"
-                                value={this.state.password}
-                                onChange={this.onChange}
-                                className={classnames('form-control form-control-lg',{
-                                    'is-invalid' : errors.password
-                                })}
-                            />
-                            <i className="la la-key"></i>
-                            {errors.password && (<div className="invalid-feedback">
-                                {errors.password}
-                            </div>)}
-                        </div>
-                        <button className="signin-close-popup" type="submit">Login</button>
-                    </form>
                 </div>
             </div>
         );
     }
 }
 
-const mapStateToProps = (state) => ({
+// get our required data from redux states
+
+const mapStateToProps = (state) =>({
+
     auth : state.auth,
-    errors:state.errors
+    errors: state.errors
+
 });
 
 export default connect(mapStateToProps,{loginStudent})(Login);
