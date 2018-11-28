@@ -79,9 +79,9 @@ router.post('/',passport.authenticate(
         if (req.body.roll) profileFields.roll = req.body.roll;
         if (req.body.phone) profileFields.phone = req.body.phone;
 
-        profileFields.address = {};
-        if (req.body.city) profileFields.address.city = req.body.city;
-        if (req.body.country) profileFields.address.country = req.body.country;
+        // profileFields.address = {};
+        // if (req.body.city) profileFields.address.city = req.body.city;
+        // if (req.body.country) profileFields.address.country = req.body.country;
 
         // Skills - Spilt into array
         if (typeof req.body.skills !== 'undefined') {

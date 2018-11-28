@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from "react-router-dom";
+import {Link, withRouter} from 'react-router-dom';
 import TextFieldGroup from '../common/TextFieldGroup';
-import InputGroup from '../common/InputGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+import InputGroup from '../common/InputGroup';
 import SelectListGroup from '../common/SelectListGroup';
-import {createProfile} from "../../actions/profileAcions";
-
-
+import {createProfile , getCurrentProfile} from '../../actions/profileAcions';
+import isEmpty from '../../validations/isEmpty';
 
 class CreateProfile extends Component {
-    state = {
+
+    state ={
         displaySocialInputs: false,
         handle: '',
         company: '',
@@ -31,9 +31,71 @@ class CreateProfile extends Component {
         errors: {}
     };
 
+    componentDidMount(){
+        this.props.getCurrentProfile();
+    }
+
     componentWillReceiveProps (nextProps) {
         if(nextProps.errors){
             this.setState({errors: nextProps.errors});
+        }
+
+        if(nextProps.profile.profile){
+
+            // get current profile data
+            const profile = nextProps.profile.profile;
+
+            // Bring skills array back to CSV
+            const skillsCSV = profile.skills.join(',');
+
+            // If profile field doesnt exist, make empty string
+            profile.company = !isEmpty(profile.company) ? profile.company : '';
+            profile.cnic = !isEmpty(profile.cnic) ? profile.cnic : '';
+            profile.roll = !isEmpty(profile.roll) ? profile.roll : '';
+            profile.phone = !isEmpty(profile.phone) ? profile.phone : '';
+            profile.website = !isEmpty(profile.website) ? profile.website : '';
+            profile.location = !isEmpty(profile.location) ? profile.location : '';
+            profile.githubusername = !isEmpty(profile.githubusername)
+                ? profile.githubusername
+                : '';
+            profile.bio = !isEmpty(profile.bio) ? profile.bio : '';
+            profile.social = !isEmpty(profile.social) ? profile.social : {};
+            profile.twitter = !isEmpty(profile.social.twitter)
+                ? profile.social.twitter
+                : '';
+            profile.facebook = !isEmpty(profile.social.facebook)
+                ? profile.social.facebook
+                : '';
+            profile.linkedin = !isEmpty(profile.social.linkedin)
+                ? profile.social.linkedin
+                : '';
+            profile.youtube = !isEmpty(profile.social.youtube)
+                ? profile.social.youtube
+                : '';
+            profile.instagram = !isEmpty(profile.social.instagram)
+                ? profile.social.instagram
+                : '';
+
+            // Set component fields state
+            this.setState({
+                handle: profile.handle,
+                company: profile.company,
+                cnic:profile.cnic,
+                roll:profile.roll,
+                phone:profile.phone,
+                website: profile.website,
+                location: profile.location,
+                status: profile.status,
+                skills: skillsCSV,
+                githubusername: profile.githubusername,
+                bio: profile.bio,
+                twitter: profile.twitter,
+                facebook: profile.facebook,
+                linkedin: profile.linkedin,
+                youtube: profile.youtube,
+                instagram:profile.instagram
+            });
+
         }
     }
 
@@ -43,9 +105,6 @@ class CreateProfile extends Component {
         const profileData = {
             handle: this.state.handle,
             company: this.state.company,
-            cnic: this.state.cnic,
-            roll: this.state.roll,
-            phone: this.state.phone,
             website: this.state.website,
             location: this.state.location,
             status: this.state.status,
@@ -66,6 +125,9 @@ class CreateProfile extends Component {
     onChange =(e) =>{
         this.setState({ [e.target.name] : e.target.value})
     };
+
+
+
 
     render() {
 
@@ -124,8 +186,6 @@ class CreateProfile extends Component {
                 </div>
             );
         }
-
-
         // Using Select option Dynamically
         // Select options for status
         const options = [
@@ -140,17 +200,19 @@ class CreateProfile extends Component {
             { label: 'Other', value: 'Other' }
         ];
 
+
         return (
             <div className="create-profile">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
+                            <Link to="/dashboard" className="btn btn-light">
+                                Go Back
+                            </Link>
                             <h1 className="display-4 text-center">
-                                Create Your Profile
+                                Edit Your Profile
                             </h1>
-                            <p className="lead text-center">
-                                Let's get some information to make your profile stand out
-                            </p>
+
                             <small className="d-block pb-3">* = required fields</small>
 
                             <form onSubmit={this.onSubmit}>
@@ -162,32 +224,6 @@ class CreateProfile extends Component {
                                     error={errors.handle}
                                     info="A unique handle for your profile URL. Your full name, company name, nickname"
                                 />
-                                <TextFieldGroup
-                                    placeholder="* University Roll no"
-                                    name="roll"
-                                    value={this.state.roll}
-                                    onChange={this.onChange}
-                                    error={errors.roll}
-                                    info="Your unique roll no provided by university"
-                                />
-                                <TextFieldGroup
-                                    placeholder="* CNIC"
-                                    name="cnic"
-                                    value={this.state.cnic}
-                                    onChange={this.onChange}
-                                    error={errors.cnic}
-                                    info="Enter Your CNIC without dashes "
-                                />
-                                <TextFieldGroup
-                                    placeholder="* Phone #"
-                                    name="phone"
-                                    type="number"
-                                    value={this.state.phone}
-                                    onChange={this.onChange}
-                                    error={errors.phone}
-                                    info="Give your primary phone number"
-                                />
-
                                 <SelectListGroup
                                     placeholder="Status"
                                     name="status"
@@ -285,4 +321,4 @@ const mapStateToProps = (state) =>({
 
 });
 
-export default connect(mapStateToProps,{createProfile})(withRouter(CreateProfile));
+export default connect(mapStateToProps,{createProfile, getCurrentProfile})(withRouter(CreateProfile));

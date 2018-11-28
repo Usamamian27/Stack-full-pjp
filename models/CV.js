@@ -53,10 +53,10 @@ const CVSchema = new Schema({
         type: String,
         required:true
     },
-    address: {
-        type: String,
-        required:true
-    },
+    // address: {
+    //     type: String,
+    //     required:true
+    // },
     social:{
         youtube :{
             type:String

@@ -3,12 +3,17 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {getCurrentProfile} from "../../actions/profileAcions";
 import Spinner from '../common/Spinner';
+import ProfileActions from "./profileActions";
+import Experience from "./Experience";
+import Education from "./Education";
+import Project from "./Project";
 
 class Dashboard extends Component {
 
     componentDidMount(){
         this.props.getCurrentProfile();
     }
+
 
     render() {
 
@@ -21,9 +26,35 @@ class Dashboard extends Component {
             dashboardContent = <Spinner />;
         } else {
 
-            if(Object.keys(profile) > 0 ){
+            if(Object.keys(profile).length > 0 ){
+                dashboardContent = (
+                    <div>
+                        <p className="lead text-muted">
+                            Welcome
+                            <Link to={`/profile/${profile.handle}`}>
+                                {" " + user.name}
+                            </Link>
+                        </p>
+
+                        {/* Buttons for Add EXP EDU  */}
+                        <ProfileActions />
 
 
+                        {/* Show Experience Data / Component */}
+
+                        <Experience experience={profile.experience}/>
+
+
+                        {/* Show Education Data / Component */}
+
+                        <Education education={profile.education}/>
+
+                        {/* Show Project Data / Component */}
+
+                        <Project projects={profile.projects}/>
+
+                    </div>
+                );
             }
             else {
                 console.log('From Else case');

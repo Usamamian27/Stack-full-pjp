@@ -16,9 +16,18 @@ import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login    from './components/auth/Login';
 import Dashboard from './components/Dashboard/dashboard';
+import CreateProfile from "./components/create-profile/CreateProfile";
+import EditProfile from './components/edit-profile/EditProfile';
+import AddExperience from "./components/add-edu-exp/AddExperience";
+import AddEducation from "./components/add-edu-exp/AddEducation";
+import AddProject from "./components/add-edu-exp/AddProject";
+import Profiles from "./components/profiles/Profiles";
+import SingleProfile from "./components/singleProfile/SingleProfile";
 
 import PrivateRoute from './components/common/PrivateRoute';
-import CreateProfile from "./components/create-profile/CreateProfile";
+
+
+
 
 // Check for token
 if (localStorage.Student){
@@ -61,11 +70,25 @@ class App extends Component {
                   <div className="container">
                       <Route exact path="/register" component={Register}/>
                       <Route exact path="/login" component={Login}/>
+                      <Route exact path="/profiles" component={Profiles} />
+                      <Route exact path="/profile/:handle" component={SingleProfile} />
                       <Switch>
                         <PrivateRoute exact path="/dashboard" component={Dashboard}/>
                       </Switch>
                       <Switch>
                           <PrivateRoute exact path="/create-profile" component={CreateProfile} />
+                      </Switch>
+                      <Switch>
+                          <PrivateRoute exact path="/edit-profile" component={EditProfile} />
+                      </Switch>
+                      <Switch>
+                          <PrivateRoute exact path="/add-experience" component={AddExperience} />
+                      </Switch>
+                      <Switch>
+                          <PrivateRoute exact path="/add-education" component={AddEducation} />
+                      </Switch>
+                      <Switch>
+                          <PrivateRoute exact path="/add-project" component={AddProject} />
                       </Switch>
                   </div>
                   <Footer/>

@@ -33,7 +33,7 @@ export const getCurrentProfile = () => dispatch => {
 export const getProfileByHandle = (handle) => dispatch => {
     dispatch(setProfileLoading());
     axios
-        .get(`/api/profile/handle/${handle}`)
+        .get(`/api/student/cv/handle/${handle}`)
         .then(res =>
             dispatch({
                 type: GET_PROFILE,
@@ -66,7 +66,7 @@ export const createProfile = (profileData, history) => dispatch => {
 // Add Experience
 export const addExperience = (expData , history) => dispatch =>{
 
-    axios.post('/api/profile/experience',expData)
+    axios.post('/api/student/cv/experience',expData)
         .then(res => history.push('/dashboard'))
         .catch(err =>
             dispatch({
@@ -81,7 +81,20 @@ export const addExperience = (expData , history) => dispatch =>{
 // Add education
 export const addEducation = (eduData, history) => dispatch => {
     axios
-        .post('/api/profile/education', eduData)
+        .post('/api/student/cv/education', eduData)
+        .then(res => history.push('/dashboard'))
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+
+// Add education
+export const addProject = (projData, history) => dispatch => {
+    axios
+        .post('/api/student/cv/project', projData)
         .then(res => history.push('/dashboard'))
         .catch(err =>
             dispatch({
@@ -95,7 +108,7 @@ export const addEducation = (eduData, history) => dispatch => {
 // Delete Experience
 export const deleteExperience = (id) => dispatch => {
     axios
-        .delete(`/api/profile/experience/${id}`)
+        .delete(`/api/student/cv/experience/${id}`)
         .then(res =>
             dispatch({
                 type: GET_PROFILE,
@@ -114,7 +127,25 @@ export const deleteExperience = (id) => dispatch => {
 // Delete Education
 export const deleteEducation = (id) => dispatch => {
     axios
-        .delete(`/api/profile/education/${id}`)
+        .delete(`/api/student/cv/education/${id}`)
+        .then(res =>
+            dispatch({
+                type: GET_PROFILE,
+                payload: res.data
+            })
+        )
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+
+// Delete Education
+export const deleteProject = (id) => dispatch => {
+    axios
+        .delete(`/api/student/cv/project/${id}`)
         .then(res =>
             dispatch({
                 type: GET_PROFILE,
@@ -135,7 +166,7 @@ export const getProfiles =() => dispatch => {
 
     dispatch(setProfileLoading());
     axios
-        .get('/api/profile/all')
+        .get('/api/student/cv/all')
         .then(res =>
             dispatch({
                 type: GET_PROFILES,

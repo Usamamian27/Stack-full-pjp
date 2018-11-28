@@ -33,7 +33,7 @@ class Header extends Component {
 
 
                 <li className="nav-item">
-                    <a href="#"
+                    <a href="#!"
                        className="nav-link"
                        onClick={this.onLogoutClick}>
 
