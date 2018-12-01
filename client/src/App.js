@@ -26,10 +26,28 @@ import SingleProfile from "./components/singleProfile/SingleProfile";
 
 import PrivateRoute from './components/common/PrivateRoute';
 
+// Company Stuff
+import EmployerLanding from './components/company/layout-employer/EmployerLanding';
+import EmployerRegister from './components/company/auth/EmployerRegister';
+import EmployerLogin from './components/company/auth/EmployerLogin';
+import CreatePortfolio from './components/company/create-portfolio/CreatePortfolio';
+import EmployerDashboard from './components/company/employer-dashboard/EmployerDashboard';
+import EditPortfolio from './components/company/edit-portfolio/EditPortfolio';
+import SinglePortfolio from "./components/company/singlePortfolio/SinglePortfolio";
+import {setCurrentCompany} from "./actions/authActions";
+import {logOutCompany} from "./actions/authActions";
+import {clearCurrentPortfolio} from "./actions/portfolioActions";
+import Portfolios from "./components/company/portfolios/Portfolios";
+
+import PrivateRouteCompany from './components/common/PrivateRouteCompany';
 
 
 
-// Check for token
+
+
+
+
+// Check for Student's token
 if (localStorage.Student){
     //Set auth token header auth
     setAuthToken(localStorage.Student);
@@ -57,6 +75,35 @@ if (localStorage.Student){
 
 }
 
+// Check for Token for Company/ Employer
+// Check for token
+if (localStorage.Company){
+    //Set auth token header auth
+    setAuthToken(localStorage.Company);
+    //Decode Token & User Info & Expiry time
+    const decoded = jwt_decode(localStorage.Company);
+    // Set user and isAuthenticated
+    store.dispatch(setCurrentCompany(decoded));
+
+
+
+    //Check for Expired Token
+    const currentTime = Date.now() / 1000;
+    if (decoded.exp < currentTime){
+        // Logout Company
+        store.dispatch(logOutCompany());
+
+        // Clear Portfolio
+        store.dispatch(clearCurrentPortfolio());
+
+        // Redirect to login
+        window.location.href = '/employer-login';
+
+
+    }
+
+}
+
 
 class App extends Component {
   render() {
@@ -66,7 +113,9 @@ class App extends Component {
             <Router>
               <div className="App">
                   <Header/>
+                  <Route exact path="/employer-landing" component={EmployerLanding} />
                   <Route exact path="/" component={Landing}/>
+
                   <div className="container">
                       <Route exact path="/register" component={Register}/>
                       <Route exact path="/login" component={Login}/>
@@ -90,6 +139,23 @@ class App extends Component {
                       <Switch>
                           <PrivateRoute exact path="/add-project" component={AddProject} />
                       </Switch>
+                  </div>
+
+                  <div className="container">
+                      <Route exact path="/employer-register" component={EmployerRegister}/>
+                      <Route exact path="/employer-login" component={EmployerLogin}/>
+                      <Route exact path="/portfolio/:handle" component={SinglePortfolio} />
+                      <Route exact path="/portfolios" component={Portfolios} />
+                      <Switch>
+                          <PrivateRouteCompany exact path="/employer-dashboard" component={EmployerDashboard} />
+                      </Switch>
+                      <Switch>
+                          <PrivateRouteCompany exact path="/create-portfolio" component={CreatePortfolio} />
+                      </Switch>
+                      <Switch>
+                          <PrivateRouteCompany exact path="/edit-portfolio" component={EditPortfolio} />
+                      </Switch>
+
                   </div>
                   <Footer/>
               </div>

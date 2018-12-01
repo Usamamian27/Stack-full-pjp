@@ -10,9 +10,10 @@ const PortfolioSchema = new Schema ({
         type: Schema.Types.ObjectId,
         ref:'companies'
     },
-    name: {
-        type:String,
-        required:true
+    handle:{
+        type: String,
+        required:true,
+        max:40
     },
     phone: {
         type:String,
@@ -26,16 +27,38 @@ const PortfolioSchema = new Schema ({
             city: {
                 type:String,
                 //required:true
-            }, 
+            },
             country: {
                 type:String,
                 //required:true
             },
     },
-    desc:{
+    description:{
         type:String,
         required:true
-    }
+    },
+    social:{
+        youtube :{
+            type:String
+        },
+        twitter :{
+            type:String
+        },
+        facebook :{
+            type:String
+        },
+        linkedin :{
+            type:String
+        },
+        instagram :{
+            type:String
+        },
+        date:{
+            type:Date,
+            default:Date.now
+        }
+
+    },
 });
 
 module.exports = Portfolio = mongoose.model('portfolios',PortfolioSchema);

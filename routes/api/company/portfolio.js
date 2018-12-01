@@ -74,18 +74,26 @@ router.post('/',passport.authenticate(
         // Get fields
         const profileFields = {};
         profileFields.user = req.user.id;
-        if (req.body.name) profileFields.name = req.body.name;
-        if (req.body.email) profileFields.email = req.body.email;
+        // if (req.body.name) profileFields.name = req.body.name;
+        // if (req.body.email) profileFields.email = req.body.email;
         if (req.body.website) profileFields.website = req.body.website;
-        if (req.body.address) profileFields.address = req.body.address;
+        if (req.body.handle) profileFields.handle = req.body.handle;
         if (req.body.phone) profileFields.phone = req.body.phone;
-        if (req.body.desc) profileFields.desc = req.body.desc;
+        if (req.body.description) profileFields.description = req.body.description;
 
         // Address
         profileFields.address={};
-        if (req.body.city) profileFields.address.city = req.body.city
-        if (req.body.country) profileFields.address.country = req.body.country
-    
+        if (req.body.city) profileFields.address.city = req.body.city;
+        if (req.body.country) profileFields.address.country = req.body.country;
+
+        // Social
+        profileFields.social = {};
+        if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
+        if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
+        if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
+        if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
+        if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
+
 
         Portfolio.findOne({user : req.user.id})
 
@@ -146,11 +154,29 @@ router.get('/user/:user_id',(req,res)=>{
         .catch(err => res.status(404).json({profile:'No Portfolio Found'}));
 });
 
+// route Get api/student/cv/handle/:handle
+// desc Get profile by handle
+// access public
+
+router.get('/handle/:handle',(req,res)=>{
+
+    const errors ={};
+
+    Portfolio.findOne({handle:req.params.handle})
+        .populate('user',['name','avatar'])
+        .then(profile =>{
+            if(!profile){
+                errors.noprofile = 'No Portfolio found for this user';
+                res.status(404).json(errors);
+            }
+            res.json(profile);
+        })
+        .catch(err => res.status(404).json(err));
+});
+
 // route Delete api/student/cv
 // desc  Delete user and cv
 // access private
-
-
 router.delete ('/',passport.authenticate('Company',{session : false}),
     (req,res)=>{
 

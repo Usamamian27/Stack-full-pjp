@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 class ProfileGithub extends Component {
     state = {
-        clientId: 'b9967fa56ec9682d99c4',
-        clientSecret: '23f919a2a9b4cdead59900ff87706b15b127a68f',
+        clientId: 'c835b51fed473b0eb803',
+        clientSecret: 'eee52aaf5c1a695084897c7e11303ce5bc1b383d',
         count: 5,
         sort: 'created: asc',
         repos: []

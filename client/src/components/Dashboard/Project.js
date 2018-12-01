@@ -32,7 +32,7 @@ class Project extends Component {
 
         return (
             <div>
-                <h4 className="mb-4">Experience Credentials</h4>
+                <h4 className="mb-4">Projects Description</h4>
                 <table className="table">
                     <thead>
                     <tr>
@@ -43,11 +43,6 @@ class Project extends Component {
                     </tr>
                     {project}
                     </thead>
-
-
-
-
-
                 </table>
 
             </div>

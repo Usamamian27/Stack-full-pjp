@@ -2,17 +2,10 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-
-
-
-
-class Landing extends Component {
+class EmployerLanding extends Component {
 
     componentDidMount (){
-        if(this.props.auth.isAuthenticated){
-            this.props.history.push('/dashboard');
-        }
-        else if(this.props.authCompany.isCompanyAuthenticated){
+        if(this.props.authCompany.isCompanyAuthenticated){
             this.props.history.push('/employer-dashboard');
         }
     }
@@ -24,13 +17,13 @@ class Landing extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12 text-center">
-                                <h1 className="display-3 mb-4">PUCIT JOB PORTAL
+                                <h1 className="display-3 mb-4">For Employers / Companies
                                 </h1>
-                                <p className="lead"> Create a profile/portfolio, Find a Candidate / Company
+                                <p className="lead"> Create a portfolio, Find a Candidate
                                 </p>
                                 <hr/>
-                                <Link to="/register" className="btn btn-lg btn-info mr-2">Sign Up</Link>
-                                <Link to="/login" className="btn btn-lg btn-light">Login</Link>
+                                <Link to="/employer-register" className="btn btn-lg btn-info mr-2">Sign Up</Link>
+                                <Link to="/employer-login" className="btn btn-lg btn-light">Login</Link>
                             </div>
                         </div>
                     </div>
@@ -41,7 +34,6 @@ class Landing extends Component {
 }
 
 const mapStateToProps = (state) =>({
-    auth : state.auth,
-    authCompany:state.authCompany
+    authCompany : state.authCompany
 });
-export default connect(mapStateToProps)(Landing);
+export default connect(mapStateToProps,null)(EmployerLanding);

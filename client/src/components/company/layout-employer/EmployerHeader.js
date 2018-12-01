@@ -1,25 +1,24 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {logOutUser} from "../../actions/authActions";
-import {clearCurrentProfile} from "../../actions/profileAcions";
-import {logOutCompany} from "../../actions/authActions";
+import {logOutUser} from "../../../actions/authActions";
+import {clearCurrentProfile} from "../../../actions/profileAcions";
 
+class EmployerHeader extends Component {
 
-class Header extends Component {
-
-
+    state ={
+        isCompanyHeader : false
+    };
     onLogoutClick = (e) =>{
         e.preventDefault();
         this.props.clearCurrentProfile();
         this.props.logOutUser();
     };
 
-    onCompanyLogoutClick = (e) =>{
-        e.preventDefault();
-        this.props.logOutCompany();
-    };
+    onEmployerHeader = (e)=>{
+        this.state.isCompanyHeader = !this.state.isCompanyHeader;
 
+    };
 
 
     render() {
@@ -50,7 +49,7 @@ class Header extends Component {
                         <img className="rounded-circle"
                              src={user.avatar} alt={user.name}
                              style={{width:'25px' , marginRight:'5px'}}
-                             // title="you must have a gravatar connected to your email"
+                             title="you must have a gravatar connected to your email"
                         />
                         {' '}
                         <Link to="/login">
@@ -74,55 +73,19 @@ class Header extends Component {
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link  className="nav-link" to="/employer-landing">
+                    <Link onClick={this.onEmployerHeader()} className="nav-link" to="/employer-landing">
                         Employer
                     </Link>
                 </li>
             </ul>
         );
 
-        const authCompanyLinks = (
-            <ul className="navbar-nav ml-auto">
-
-                <li className="nav-item">
-                    <Link className="nav-link" to="/employer-feed">
-                        News Feed
-                    </Link>
-                </li>
-
-                <li className="nav-item">
-                    <Link className="nav-link" to="/employer-dashboard">
-                        Dashboard
-                    </Link>
-                </li>
-
-
-                <li className="nav-item">
-                    <a href="#!"
-                       className="nav-link"
-                       onClick={this.onCompanyLogoutClick}>
-
-                        <img className="rounded-circle"
-                             src={company.avatar} alt={company.name}
-                             style={{width:'25px' , marginRight:'5px'}}
-                            // title="you must have a gravatar connected to your email"
-                        />
-                        {' '}
-                        <Link to="/employer-login">
-                            Logout
-                        </Link>
-                    </a>
-                </li>
-            </ul>
-        );
-
-
 
         return (
             <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                 <div className="container">
                     <Link className="navbar-brand" to="/">
-                        PUCIT JOB PORTAL
+                        DevConnector
                     </Link>
                     <button className="navbar-toggler" type="button"
                             data-toggle="collapse" data-target="#mobile-nav">
@@ -136,14 +99,16 @@ class Header extends Component {
                                     Developers
                                 </Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/portfolios">
-                                    Companies
-                                </Link>
-                            </li>
                         </ul>
 
-                        {isAuthenticated ? authLinks : (isCompanyAuthenticated ? authCompanyLinks : guestLinks)}
+                        {isAuthenticated ? authLinks : guestLinks}
+                        {/*{isCompanyAuthenticated ? authLinks : guestLinks}*/}
+
+                        {/*{ (isAuthenticated ? authLinks : guestLinks) || (isCompanyAuthenticated ? authLinks : guestLinks)}*/}
+
+                        {/*{if()}*/}
+
+
                     </div>
                 </div>
             </nav>
@@ -156,4 +121,4 @@ const mapStateToProps = (state) =>({
     authCompany : state.authCompany
 });
 
-export default connect(mapStateToProps,{logOutUser,clearCurrentProfile,logOutCompany})(Header);
+export default connect(mapStateToProps,{logOutUser,clearCurrentProfile})(EmployerHeader);
