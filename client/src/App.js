@@ -38,8 +38,10 @@ import {setCurrentCompany} from "./actions/authActions";
 import {logOutCompany} from "./actions/authActions";
 import {clearCurrentPortfolio} from "./actions/portfolioActions";
 import Portfolios from "./components/company/portfolios/Portfolios";
-
+import Posts from './components/company/posts/Posts';
+import SinglePost from "./components/company/singlePost/SinglePost";
 import PrivateRouteCompany from './components/common/PrivateRouteCompany';
+
 
 
 
@@ -139,6 +141,13 @@ class App extends Component {
                       <Switch>
                           <PrivateRoute exact path="/add-project" component={AddProject} />
                       </Switch>
+                      <Switch>
+                          <PrivateRoute exact path="/feed" component={Posts} />
+                      </Switch>
+                      <Switch>
+                          <PrivateRoute exact path="/student-post/:id" component={SinglePost} />
+                      </Switch>
+
                   </div>
 
                   <div className="container">
@@ -154,6 +163,12 @@ class App extends Component {
                       </Switch>
                       <Switch>
                           <PrivateRouteCompany exact path="/edit-portfolio" component={EditPortfolio} />
+                      </Switch>
+                      <Switch>
+                          <PrivateRouteCompany exact path="/employer-feed" component={Posts} />
+                      </Switch>
+                      <Switch>
+                          <PrivateRouteCompany exact path="/post/:id" component={SinglePost} />
                       </Switch>
 
                   </div>

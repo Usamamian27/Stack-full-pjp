@@ -134,10 +134,12 @@ router.post('/comment/:id',passposrt.authenticate(['Company','Student'],{session
     Post.findById(req.params.id)
         .then(post =>{
             const newComment ={
-                text: req.body.text,
-                name: req.body.name,
-                avatar: req.body.avatar,
-                user:req.user.id
+                 text: req.body.text,
+                 name: req.body.name,
+                 avatar: req.body.avatar,
+                 user:req.user.id
+
+
             };
 
             // Add comment to comments array
@@ -182,7 +184,7 @@ router.delete('/comment/:id/:comment_id',passposrt.authenticate(['Company','Stud
                 // }else{
                 //     return res.status((400).json({msg:'Not Authenticated'}));
                 // }
-                
+
                 // if(post.comments.filter(comment => comment.user.toString() === req.user.id)){
                 //     // get an index to remove
                 //     const removeIndex = post.comments

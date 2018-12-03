@@ -1,0 +1,18 @@
+// This file is just extracting the comments from comment array
+// and sending it to CommentItem to display
+
+import React, {Component} from 'react';
+import CommentItem from './CommentItem';
+
+class CommentFeed extends Component {
+    render() {
+
+        const {comments , postId} = this.props;
+
+        return comments.map(comment =>(
+            <CommentItem key={comment._id} comment={comment} postId={postId} />
+        ));
+    }
+}
+
+export default CommentFeed;

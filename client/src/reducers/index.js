@@ -5,7 +5,7 @@ import {combineReducers} from 'redux';
 import authReducer from './authReducer';
 import errorReducer from './errorReducer';
 import profileReducer from './profileReducer';
-//import postReducer from './postReducer';
+import postReducer from './postReducer';
 
 import authCompanyReducer from './authComapnyReducer';
 import portfolioReducer from './portfolioReducer';
@@ -18,5 +18,6 @@ export default combineReducers({
     errors:errorReducer,
     profile:profileReducer,
     authCompany:authCompanyReducer,
-    portfolio:portfolioReducer
+    portfolio:portfolioReducer,
+    post:postReducer
 });

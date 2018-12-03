@@ -7,7 +7,7 @@ const PostSchema = new Schema({
    user:{
        type: Schema.Types.ObjectId,
        ref:'companies'
-   } ,
+   },
     text:{
        type: String,
         required:true
@@ -32,7 +32,7 @@ const PostSchema = new Schema({
                 type:Schema.ObjectId,
                 ref:'companies'
             },
-            student:{
+            user1:{
                 type:Schema.ObjectId,
                 ref:'students'
             },
