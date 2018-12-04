@@ -31,13 +31,14 @@ class EmployerDashboard extends Component {
                                 {" " + company.name}
                             </Link>
                         </p>
-
-                        {/*/!* Buttons for Add EXP EDU  *!/*/}
-                        {/*<ProfileActions />*/}
                         <div className="btn-group mb-4" role="group">
                             <Link to="/edit-portfolio" className="btn btn-light">
                                 <i className="fas fa-user-circle text-info mr-1"></i>
                                 Edit Profile
+                            </Link>
+                            <Link to="/employer-feed" className="btn btn-light">
+                                <i className="fas fa-briefcase text-info mr-1"></i>
+                                Post a Job
                             </Link>
                         </div>
 

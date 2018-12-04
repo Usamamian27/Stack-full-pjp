@@ -48,6 +48,24 @@ export const getProfileByHandle = (handle) => dispatch => {
         );
 };
 
+// Get  profile by handle
+export const showProfile = (id) => dispatch => {
+    dispatch(setProfileLoading());
+    axios
+        .get(`/api/student/cv/user/${id}`)
+        .then(res =>
+            dispatch({
+                type: GET_PROFILE,
+                payload: res.data
+            })
+        )
+        .catch(err =>
+            dispatch({
+                type: GET_PROFILE,
+                payload: {}
+            })
+        );
+};
 
 // Create Profile
 export const createProfile = (profileData, history) => dispatch => {

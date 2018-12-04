@@ -4,7 +4,7 @@ const isEmpty =  require('./isEmpty');
 
 module.exports = function validatePortfolioInput(data){
 
-    let errors= {};
+    let portfolioerrors= {};
 
     data.handle = !isEmpty(data.handle) ? data.handle : '';
     data.phone = !isEmpty(data.phone) ? data.phone : '';
@@ -13,27 +13,27 @@ module.exports = function validatePortfolioInput(data){
 
 
     if(!Validator.isLength(data.handle,{min:2 , max: 40})){
-        errors.handle = 'handle needs to be b/w 2 and 40 characters';
+        portfolioerrors.handle = 'handle needs to be b/w 2 and 40 characters';
     }
 
     if (Validator.isEmpty(data.handle)){
-        errors.handle= 'portfolio handle is required';
+        portfolioerrors.handle= 'portfolio handle is required';
     }
     if (!isEmpty(data.website)){
         if(!Validator.isURL(data.website)){
-            errors.website = 'Not a valid URL';
+            portfolioerrors.website = 'Not a valid URL';
         }
     }
     if (Validator.isEmpty(data.phone)){
-        errors.phone= 'Phone is required';
+        portfolioerrors.phone= 'Phone is required';
     }
     if (Validator.isEmpty(data.description)){
-        errors.description= 'Description is required';
+        portfolioerrors.description= 'Description is required';
     }
 
     return{
-        errors : errors,
-        isValid : isEmpty(errors)
+        portfolioerrors : portfolioerrors,
+        isValid : isEmpty(portfolioerrors)
     }
 
 };

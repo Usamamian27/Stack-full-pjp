@@ -155,6 +155,7 @@ class App extends Component {
                       <Route exact path="/employer-login" component={EmployerLogin}/>
                       <Route exact path="/portfolio/:handle" component={SinglePortfolio} />
                       <Route exact path="/portfolios" component={Portfolios} />
+                      <Route exact path="/show-profile" component={SingleProfile} />
                       <Switch>
                           <PrivateRouteCompany exact path="/employer-dashboard" component={EmployerDashboard} />
                       </Switch>

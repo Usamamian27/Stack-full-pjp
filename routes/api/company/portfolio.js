@@ -3,9 +3,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
 
-// Load Student Profile Model
+// Load Company Portfolio Model
 const Portfolio = require('../../../models/Portfolio');
-// Load Student User Model
+// Load Company User Model
 const Company = require('../../../models/Company');
 
 //Load Validations
@@ -24,9 +24,8 @@ router.get('/',passport.authenticate('Company',{session :false}),(req,res)=>{
         .populate('user',['name','avatar'])
         .then(profile =>{
            if(!profile){
-               errors.noprofile = 'No Profile Found for this Company!';
+               errors.noprofile = 'No Portfolio Found for this Company!';
                res.status(404).json(errors);
-
            }
            else {
                res.json(profile);
@@ -36,7 +35,7 @@ router.get('/',passport.authenticate('Company',{session :false}),(req,res)=>{
 });
 
 // route Get api/company/portfolio/all
-// desc Get all cvs
+// desc Get all portfolios
 // access public
 
 router.get('/all',(req,res)=>{
@@ -47,12 +46,12 @@ router.get('/all',(req,res)=>{
         .populate('user',['name','avatar'])
         .then(profiles => {
             if(!profiles){
-                errors.noprofile = 'There are no Portfolios';
+                errors.noportfolio = 'There are no Portfolios';
                 return res.status(404).json(errors);
             }
             res.json(profiles);
         })
-        .catch(err => res.status(404).json({profile:'No Portfolio Found'}));
+        .catch(err => res.status(404).json({portfolio:'No Portfolio Found'}));
 });
 
 // route Post api/company/portfolio
@@ -65,7 +64,7 @@ router.post('/',passport.authenticate(
     (req,res)=>{
 
         // Check  Validations
-        const {errors , isValid } = validatePortfolioInput(req.body);
+        const {portfolioerrors , isValid } = validatePortfolioInput(req.body);
         // Return any errors with 400 status
         if(!isValid){
             return res.status(400).json(errors);
@@ -115,11 +114,11 @@ router.post('/',passport.authenticate(
                     // Create
 
                     // Check if email exist
-                    Portfolio.findOne({email : profileFields.email})
+                    Portfolio.findOne({handle : profileFields.handle})
                         .then(profile =>{
                             if (profile){
-                                errors.email ='The email Already Exist';
-                                res.status(400).json(errors);
+                                portfolioerrors.handle ='The handle Already Exist';
+                                res.status(400).json(portfolioerrors);
                             }
 
                             // Save profile

@@ -18,9 +18,9 @@ class PostItem extends Component {
         this.props.addLike(id);
     }
 
-    findUserLike(likes) {
+    findUserLike(applied) {
         const { authCompany } = this.props;
-        if (likes.filter(like => like.user === authCompany.company.id).length > 0) {
+        if (applied.filter(apply => apply.user === authCompany.company.id).length > 0) {
             return true;
         } else {
             return false;
@@ -43,8 +43,15 @@ class PostItem extends Component {
                         <br />
                         <p className="text-center">{post.name}</p>
                     </div>
-                    <div className="col-md-10">
-                        <p className="lead">{post.text}</p>
+                    <div className="col-md-2">
+                        Job Title <p className="lead">{post.title}</p>
+                        Job Type <p className="lead">{post.type}</p>
+                    </div>
+                    <div className="col-md-8">
+                        Experience
+                        <p className="lead">{post.experience}</p>
+                        Skills
+                        <p className="lead">{post.skills}</p>
 
                         {/* These buttons only show if show action is true */}
                         {showActions ?
@@ -56,18 +63,15 @@ class PostItem extends Component {
                                         <button
                                             onClick={this.onLikeClick.bind(this,post._id)}
                                             type="button"
+                                            title="Click to apply to this job"
                                             className="btn btn-light mr-1">
                                             <i
-                                                className={classnames('fas fa-thumbs-up', {
-                                                        'text-primary': this.findUserLike(post.applied)
-                                                    }
-                                                )
-                                                }
+                                                className={classnames('fas fa-plus', {
+                                                    'text-danger': this.findUserLike(post.applied)
+                                                })}
                                             />
+                                            <span className="badge badge-light">Apply{post.applied.length}</span>
                                         </button>
-                                            <Link to={`/student-post/${post._id}`} className="btn btn-info mr-1">
-                                        Comments
-                                        </Link>
                                     </span>
 
 
@@ -87,12 +91,15 @@ class PostItem extends Component {
                                                 <i className="fas fa-times" />
                                             </button>
                                                 <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
-                                                    Comments
+                                                    View Details
                                                 </Link>
+                                            <span className="badge badge-light">Total Applications {post.applied.length}</span>
                                         </span>
                                     ) : null}
                                 </span>
                             ) : null}
+
+
 
                     </div>
                 </div>

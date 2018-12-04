@@ -51,6 +51,10 @@ router.post('/',passposrt.authenticate('Company',{session:false}),(req,res)=>{
         text:req.body.text,
         name:req.body.name,
         avatar:req.body.avatar,
+        title:req.body.title,
+        experience:req.body.experience,
+        skills:req.body.skills,
+        type:req.body.type,
         user:req.user.id
     });
 
@@ -101,7 +105,7 @@ router.post('/apply/:id',passposrt.authenticate('Student',{session:false}),
             Post.findById(req.params.id)
                 .then(post => {
                     if(post.applied.filter(apply => apply.user.toString() === req.user.id).length > 0){
-                        return res.status((400).json({alreadyApplied:'User already appllied to this post'}))
+                        return res.status((400).json({alreadyApplied:'User already applied to this post'}))
                     }
 
                     // Add user id to apply array to apply the post
@@ -130,24 +134,72 @@ router.post('/comment/:id',passposrt.authenticate(['Company','Student'],{session
             // If any errors , send 400 with error object
             return res.status(400).json(errors);
         }
+        Post.findById(req.params.id)
+            .then(post => {
+                const newComment = {
+                    text: req.body.text,
+                    name: req.user.name,
+                    avatar: req.user.avatar,
+                    //user: req.comments.user1.id
+                    user:req.user.id
+                };
 
-    Post.findById(req.params.id)
-        .then(post =>{
-            const newComment ={
-                 text: req.body.text,
-                 name: req.body.name,
-                 avatar: req.body.avatar,
-                 user:req.user.id
+                // Add comment to comments array
+                post.comments.unshift(newComment);
+                //save
+                post.save().then(post => res.json(post));
+            })
+        .catch(err => res.status(404).json({nopostfound: 'No Post Found'}));
 
 
-            };
 
-            // Add comment to comments array
-            post.comments.unshift(newComment);
-            //save
-            post.save().then(post => res.json(post));
-        })
-        .catch(err => res.status(404).json({nopostfound:'No Post Found'}));
+        // Student.findOne({user: req.user.id})
+        //     .then(profile => {
+        //
+        //         Post.findById(req.params.id)
+        //             .then(post => {
+        //                 const newComment = {
+        //                     text: req.body.text,
+        //                     name: req.user.name,
+        //                     avatar: req.user.avatar,
+        //                     user: req.user.id
+        //                 };
+        //
+        //
+        //                 // Add comment to comments array
+        //                 post.comments.unshift(newComment);
+        //                 //save
+        //                 console.log(newComment);
+        //                 post.save().then(post => res.json(post));
+        //             })
+        //             //.catch(err => res.status(404).json({nopostfound: 'No Post Found'}));
+        //
+        //
+        // Company.findOne({user: req.user.id})
+        //     .then(profile => {
+        //
+        //         Post.findById(req.params.id)
+        //             .then(post => {
+        //                 const newComment = {
+        //                     text: req.body.text,
+        //                     name: req.body.name,
+        //                     avatar: req.body.avatar,
+        //                     user: req.user.id
+        //
+        //
+        //                 };
+        //
+        //                 // Add comment to comments array
+        //                 post.comments.unshift(newComment);
+        //                 //save
+        //                 post.save().then(post => res.json(post));
+        //             })
+        //             .catch(err => res.status(404).json({nopostfound: 'No Post Found'}));
+        //     })
+        //     .catch(err => res.status(404).json({nopostfound: 'No Post Found'}));
+        //
+        //     });
+
 
 });
 

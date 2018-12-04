@@ -52,6 +52,22 @@ const PostSchema = new Schema({
             }
         }
     ],
+    title:{
+        type: String,
+        required:true
+    },
+    type:{
+        type: String,
+        required:true
+    },
+    experience:{
+        type: String,
+        required:true
+    },
+    skills:{
+        type: [String],
+        required:true
+    },
     date:{
         type:Date,
         default:Date.now

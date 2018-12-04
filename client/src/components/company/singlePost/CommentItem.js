@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {deleteComment} from '../../../actions/postActions';
+import {showProfile} from "../../../actions/profileAcions";
 import {Link } from 'react-router-dom';
 
 class CommentItem extends Component {
@@ -13,10 +14,13 @@ class CommentItem extends Component {
 
     };
 
+    onViewProfile(id){
+        this.props.showProfile(id);
+    }
+
     render() {
 
         const {comment , postId , authCompany,auth} = this.props;
-
         return (
             <div className="card card-body mb-3">
                 <div className="row">
@@ -28,7 +32,9 @@ class CommentItem extends Component {
                                 alt=""
                             />
                         </Link>
+
                         <br />
+
                         <p className="text-center">{comment.name}</p>
                     </div>
 
@@ -43,16 +49,41 @@ class CommentItem extends Component {
                             >
                                 <i className="fas fa-times" />
                             </button>
-                        ) : null}
+
+                        ) :
+                            null
+                        }
+
+
+
+
                         {comment.user === auth.user.id ? (
-                            <button
-                                onClick={this.onDeleteClick.bind(this, postId, comment._id)}
-                                type="button"
-                                className="btn btn-danger mr-1"
-                            >
-                                <i className="fas fa-times" />
-                            </button>
-                        ) : null}
+                            <span>
+                                <button
+                                    onClick={this.onDeleteClick.bind(this, postId, comment._id)}
+                                    type="button"
+                                    className="btn btn-danger mr-1"
+                                >
+                                    <i className="fas fa-times" />
+                                </button>
+
+
+                            </span>
+
+
+                        ) :
+                            null
+                        }
+
+                        <Link
+                            onClick={this.onViewProfile.bind(this,comment.user)}
+                            className="btn btn-primary"
+                            to="/show-profile"
+                        >
+                            View Profile
+                        </Link>
+
+
                     </div>
                 </div>
             </div>
@@ -64,8 +95,9 @@ class CommentItem extends Component {
 const mapStateToProps =(state) =>({
     authCompany : state.authCompany,
     portfolio : state.portfolio,
-    auth:state.auth
+    auth:state.auth,
+    profile:state.profile
 });
 
-export default connect(mapStateToProps,{deleteComment})(CommentItem);
+export default connect(mapStateToProps,{deleteComment,showProfile})(CommentItem);
 

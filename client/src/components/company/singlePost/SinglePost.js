@@ -15,6 +15,7 @@ class SinglePost extends Component {
 
     render() {
         const {post ,loading} = this.props.post;
+        const {auth,authCompany} = this.props;
 
         let postContent;
 
@@ -27,6 +28,7 @@ class SinglePost extends Component {
                 <div>
                     <PostItem post={post} showActions ={false} />
                     <CommentForm postId={post._id} />
+                    //show applied feed here
                     <CommentFeed postId={post._id} comments={post.comments}/>
                 </div>
             );
@@ -37,9 +39,16 @@ class SinglePost extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
-                            <Link to="/employer-feed" className="btn btn-light mb-3">
-                                Back To Feed
-                            </Link>
+                            {auth.isAuthenticated ? (
+                                <Link to="/feed" className="btn btn-light mb-3">
+                                    Back To Feed
+                                </Link>
+                            ):null}
+                            {authCompany.isCompanyAuthenticated ? (
+                                <Link to="/employer-feed" className="btn btn-light mb-3">
+                                    Back To Feed
+                                </Link>
+                            ):null}
                             {postContent}
                         </div>
                     </div>
@@ -50,7 +59,9 @@ class SinglePost extends Component {
 }
 
 const mapStateToProps =(state) =>({
-    post : state.post
+    post : state.post,
+    auth:state.auth,
+    authCompany:state.authCompany
 });
 
 export default connect(mapStateToProps,{getpost})(SinglePost);
