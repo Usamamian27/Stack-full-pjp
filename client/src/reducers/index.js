@@ -10,6 +10,7 @@ import postReducer from './postReducer';
 import authCompanyReducer from './authComapnyReducer';
 import portfolioReducer from './portfolioReducer';
 
+import authAdminReducer from './authAdminReducer';
 
 
 export default combineReducers({
@@ -19,5 +20,6 @@ export default combineReducers({
     profile:profileReducer,
     authCompany:authCompanyReducer,
     portfolio:portfolioReducer,
-    post:postReducer
+    post:postReducer,
+    authAdmin:authAdminReducer
 });

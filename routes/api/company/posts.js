@@ -104,12 +104,17 @@ router.post('/apply/:id',passposrt.authenticate('Student',{session:false}),
 
             Post.findById(req.params.id)
                 .then(post => {
+
+                    const newApplicant = {
+                        name: req.user.name,
+                        avatar: req.user.avatar,
+                        user:req.user.id
+                    };
                     if(post.applied.filter(apply => apply.user.toString() === req.user.id).length > 0){
                         return res.status((400).json({alreadyApplied:'User already applied to this post'}))
                     }
-
-                    // Add user id to apply array to apply the post
-                    post.applied.unshift({user : req.user.id});
+                    // Add user id to apply array to apply to the post
+                    post.applied.unshift(newApplicant);
                     // save to mongoDB
                     post.save().then(post => res.json(post) );
 

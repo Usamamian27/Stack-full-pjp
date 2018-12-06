@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {loginStudent} from "../../actions/authActions";
+import {loginAdmin} from "../../actions/authActions";
 
 // Bring in text field component
 import TextFieldGroup from '../common/TextFieldGroup';
@@ -12,7 +12,6 @@ class Login extends Component {
     state ={
         email:'',
         password:'',
-        verify:'',
         errors:{}
     };
 
@@ -23,23 +22,23 @@ class Login extends Component {
     onSubmit =(e) =>{
         e.preventDefault();
 
-        const userData = {
+        const adminData = {
             email: this.state.email,
             password: this.state.password,
         };
-        this.props.loginStudent(userData);
+        this.props.loginAdmin(adminData);
     };
 
     componentDidMount (){
-        if(this.props.auth.isAuthenticated){
-            this.props.history.push('/dashboard');
+        if(this.props.authAdmin.isAdminAuthenticated){
+            this.props.history.push('/admin-dashboard');
         }
     }
 
     componentWillReceiveProps(nextProps){
 
-        if(nextProps.auth.isAuthenticated){
-            this.props.history.push('/dashboard');
+        if(nextProps.authAdmin.isAdminAuthenticated){
+            this.props.history.push('/admin-dashboard');
         }
 
         if(nextProps.errors){
@@ -52,7 +51,7 @@ class Login extends Component {
         const {errors} = this.state;
 
         return (
-            <div className="login">
+            <div className="admin-login">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
@@ -60,7 +59,7 @@ class Login extends Component {
                                 Log In
                             </h1>
                             <p className="lead text-center">
-                                Sign in to your DevConnector account
+                                Sign in to your admin account
                             </p>
 
                             <form onSubmit={this.onSubmit}>
@@ -71,7 +70,6 @@ class Login extends Component {
                                     value={this.state.email}
                                     onChange={this.onChange}
                                     error={errors.email}
-                                    error_verify={errors.verify}
                                 />
 
                                 <TextFieldGroup
@@ -99,9 +97,9 @@ class Login extends Component {
 
 const mapStateToProps = (state) =>({
 
-    auth : state.auth,
+    authAdmin : state.authAdmin,
     errors: state.errors
 
 });
 
-export default connect(mapStateToProps,{loginStudent})(Login);
+export default connect(mapStateToProps,{loginAdmin})(Login);

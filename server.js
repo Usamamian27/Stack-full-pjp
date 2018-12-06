@@ -8,6 +8,7 @@ const cv = require('./routes/api/student/cv');
 const company = require('./routes/api/company/companies');
 const portfolio = require('./routes/api/company/portfolio');
 const posts = require('./routes/api/company/posts');
+const admin = require('./routes/api/admin/admin');
 
 // Initialize App
 const app = express();
@@ -43,6 +44,7 @@ app.use('/api/student/cv',cv);
 app.use('/api/company/companies',company);
 app.use('/api/company/portfolio',portfolio);
 app.use('/api/company/posts',posts);
+app.use('/api/admin/admin',admin);
 
 
 

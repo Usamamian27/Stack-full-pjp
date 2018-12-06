@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 
-const StudentSchema = new Schema ({
+const AdminSchema = new Schema ({
     name :{
         type:String,
         required:true
@@ -21,10 +21,6 @@ const StudentSchema = new Schema ({
     avatar :{
         type:String
     },
-    verify:{
-      type:Boolean,
-      default: false
-    },
     date :{
         type:String,
         default:Date.now
@@ -32,4 +28,4 @@ const StudentSchema = new Schema ({
 });
 
 
-module.exports = Students = mongoose.model('students',StudentSchema);
+module.exports = Admin = mongoose.model('admin',AdminSchema);

@@ -1,7 +1,7 @@
 const Validator = require('validator');
 const isEmpty =  require('./isEmpty');
 
-module.exports = function validateLoginInput(data){
+module.exports = function validateAdminLoginInput(data){
 
     let errors= {};
 
@@ -18,10 +18,6 @@ module.exports = function validateLoginInput(data){
 
     if(Validator.isEmpty(data.password)){
         errors.password = 'Password Field is Required';
-    }
-
-    if(!data.verify){
-        errors.verify = 'Not approved by admin yet!';
     }
 
     return{

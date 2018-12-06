@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {logOutUser} from "../../actions/authActions";
 import {clearCurrentProfile} from "../../actions/profileAcions";
 import {logOutCompany} from "../../actions/authActions";
+import {logOutAdmin} from "../../actions/authActions";
 
 
 class Header extends Component {
@@ -19,6 +20,10 @@ class Header extends Component {
         e.preventDefault();
         this.props.logOutCompany();
     };
+    onAdminLogoutClick = (e) =>{
+        e.preventDefault();
+        this.props.logOutAdmin();
+    };
 
 
 
@@ -26,6 +31,7 @@ class Header extends Component {
 
         const {isAuthenticated , user} = this.props.auth;
         const {isCompanyAuthenticated , company} = this.props.authCompany;
+        const {isAdminAuthenticated ,admin} =this.props.authAdmin;
         const authLinks = (
             <ul className="navbar-nav ml-auto">
 
@@ -63,16 +69,16 @@ class Header extends Component {
 
         const guestLinks = (
             <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                    <Link className="nav-link" to="/register">
-                        Sign Up
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/login">
-                        Login
-                    </Link>
-                </li>
+                {/*<li className="nav-item">*/}
+                    {/*<Link className="nav-link" to="/register">*/}
+                        {/*Sign Up*/}
+                    {/*</Link>*/}
+                {/*</li>*/}
+                {/*<li className="nav-item">*/}
+                    {/*<Link className="nav-link" to="/login">*/}
+                        {/*Login*/}
+                    {/*</Link>*/}
+                {/*</li>*/}
                 <li className="nav-item">
                     <Link  className="nav-link" to="/employer-landing">
                         Employer
@@ -116,6 +122,34 @@ class Header extends Component {
             </ul>
         );
 
+        const authAdminLinks = (
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                    <Link className="nav-link" to="/employer-dashboard">
+                        Dashboard
+                    </Link>
+                </li>
+
+
+                <li className="nav-item">
+                    <a href="#!"
+                       className="nav-link"
+                       onClick={this.onAdminLogoutClick}>
+
+                        <img className="rounded-circle"
+                             src={admin.avatar} alt={admin.name}
+                             style={{width:'25px' , marginRight:'5px'}}
+                            // title="you must have a gravatar connected to your email"
+                        />
+                        {' '}
+                        <Link to="/admin-login">
+                            Logout
+                        </Link>
+                    </a>
+                </li>
+            </ul>
+        );
+
 
 
         return (
@@ -143,7 +177,8 @@ class Header extends Component {
                             </li>
                         </ul>
 
-                        {isAuthenticated ? authLinks : (isCompanyAuthenticated ? authCompanyLinks : guestLinks)}
+                        {isAuthenticated ? authLinks : (isCompanyAuthenticated ? authCompanyLinks : (isAdminAuthenticated ? authAdminLinks : null))}
+                        {guestLinks}
                     </div>
                 </div>
             </nav>
@@ -153,7 +188,8 @@ class Header extends Component {
 
 const mapStateToProps = (state) =>({
     auth: state.auth,
-    authCompany : state.authCompany
+    authCompany : state.authCompany,
+    authAdmin:state.authAdmin
 });
 
-export default connect(mapStateToProps,{logOutUser,clearCurrentProfile,logOutCompany})(Header);
+export default connect(mapStateToProps,{logOutUser,clearCurrentProfile,logOutCompany,logOutAdmin})(Header);

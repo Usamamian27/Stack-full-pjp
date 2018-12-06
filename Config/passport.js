@@ -3,6 +3,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const mongoose = require('mongoose');
 const Student = mongoose.model('students');
 const Company = mongoose.model('companies');
+const Admin = mongoose.model('admin');
 const keys = require('../Config/keys');
 
 var opts = {};
@@ -26,6 +27,19 @@ module.exports = (passport)=> {
 
     passport.use('Company',new JwtStrategy(opts,(jwt_payload , done )=>{
         console.log('Speaking from Company Stratergy');
+        Company.findById(jwt_payload.id)
+            .then(user=>{
+                if(user){
+                    return done(null,user);
+
+                }
+                return done(null,false);
+            })
+            .catch(err => console.log(err));
+    }));
+
+    passport.use('Admin',new JwtStrategy(opts,(jwt_payload , done )=>{
+        console.log('Speaking from Admin Stratergy');
         Company.findById(jwt_payload.id)
             .then(user=>{
                 if(user){

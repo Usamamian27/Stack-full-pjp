@@ -20,73 +20,71 @@ class CommentItem extends Component {
 
     render() {
 
-        const {comment , postId , authCompany,auth} = this.props;
+        const {apply , postId , authCompany,auth} = this.props;
         return (
-            <div className="card card-body mb-3">
-                <div className="row">
-                    <div className="col-md-2">
+            <div className="card  mb-3 mr-3 float-left" style={{width:200}}>
+                <div className="card-body" >
+
                         <Link to="#!">
                             <img
-                                className="rounded-circle d-none d-md-block"
-                                src={comment.avatar}
+                                className="rounded-circle ml-4 "
+                                style={{width:100,height:100}}
+                                src={apply.avatar}
                                 alt=""
                             />
                         </Link>
-
-                        <br />
-
-                        <p className="text-center">{comment.name}</p>
-                    </div>
-
-                    <div className="col-md-10">
-                        <p className="lead">{comment.text}</p>
-
-                        {comment.user === authCompany.company.id ? (
-                            <button
-                                onClick={this.onDeleteClick.bind(this, postId, comment._id)}
-                                type="button"
-                                className="btn btn-danger mr-1"
-                            >
-                                <i className="fas fa-times" />
-                            </button>
-
-                        ) :
-                            null
-                        }
-
-
-
-
-                        {comment.user === auth.user.id ? (
-                            <span>
-                                <button
-                                    onClick={this.onDeleteClick.bind(this, postId, comment._id)}
-                                    type="button"
-                                    className="btn btn-danger mr-1"
-                                >
-                                    <i className="fas fa-times" />
-                                </button>
-
-
-                            </span>
-
-
-                        ) :
-                            null
-                        }
-
+                        <h4 className="card-title text-center">{apply.name}</h4>
                         <Link
-                            onClick={this.onViewProfile.bind(this,comment.user)}
-                            className="btn btn-primary"
+                            onClick={this.onViewProfile.bind(this,apply.user)}
+                            className="btn btn-primary ml-4 "
                             to="/show-profile"
                         >
                             View Profile
                         </Link>
 
+                    {/*<div className="col-md-10">*/}
+                        {/*/!*<p className="lead">{applicants.text}</p>*!/*/}
+                        {/*/!*{comment.user === authCompany.company.id ? (*!/*/}
+                            {/*/!*<button*!/*/}
+                                {/*/!*onClick={this.onDeleteClick.bind(this, postId, comment._id)}*!/*/}
+                                {/*/!*type="button"*!/*/}
+                                {/*/!*className="btn btn-danger mr-1"*!/*/}
+                            {/*/!*>*!/*/}
+                                {/*/!*<i className="fas fa-times" />*!/*/}
+                            {/*/!*</button>*!/*/}
 
-                    </div>
+                        {/*/!*) :*!/*/}
+                            {/*/!*null*!/*/}
+                        {/*/!*}*!/*/}
+
+
+
+
+                        {/*/!*{comment.user === auth.user.id ? (*!/*/}
+                            {/*/!*<span>*!/*/}
+                                {/*/!*<button*!/*/}
+                                    {/*/!*onClick={this.onDeleteClick.bind(this, postId, comment._id)}*!/*/}
+                                    {/*/!*type="button"*!/*/}
+                                    {/*/!*className="btn btn-danger mr-1"*!/*/}
+                                {/*/!*>*!/*/}
+                                    {/*/!*<i className="fas fa-times" />*!/*/}
+                                {/*/!*</button>*!/*/}
+
+
+                            {/*/!*</span>*!/*/}
+
+
+                        {/*/!*) :*!/*/}
+                            {/*/!*null*!/*/}
+                        {/*/!*}*!/*/}
+
+
+
+
+                    {/*</div>*/}
                 </div>
             </div>
+
         );
     }
 }

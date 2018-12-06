@@ -38,7 +38,13 @@ class PostForm extends Component {
         };
 
         this.props.addpost(newPost);
-        this.setState({ text: '' });
+        this.setState({
+            text: '',
+            title:'',
+            type:'',
+            experience:'',
+            skills:''
+        });
     };
 
     onChange=(e)=> {

@@ -42,11 +42,12 @@ import Posts from './components/company/posts/Posts';
 import SinglePost from "./components/company/singlePost/SinglePost";
 import PrivateRouteCompany from './components/common/PrivateRouteCompany';
 
+// Admin Stuff
+import AdminLogin from './components/admin/AdminLogin';
+import AdminRegister from './components/admin/AdminRegister';
 
-
-
-
-
+import {setCurrentAdmin} from "./actions/authActions";
+import {logOutAdmin} from "./actions/authActions";
 
 
 // Check for Student's token
@@ -57,8 +58,6 @@ if (localStorage.Student){
     const decoded = jwt_decode(localStorage.Student);
     // Set user and isAuthenticated
     store.dispatch(setCurrentUser(decoded));
-
-
 
     // Check for Expired Token
     const currentTime = Date.now() / 1000;
@@ -79,7 +78,7 @@ if (localStorage.Student){
 
 // Check for Token for Company/ Employer
 // Check for token
-if (localStorage.Company){
+if (localStorage.Company) {
     //Set auth token header auth
     setAuthToken(localStorage.Company);
     //Decode Token & User Info & Expiry time
@@ -88,10 +87,9 @@ if (localStorage.Company){
     store.dispatch(setCurrentCompany(decoded));
 
 
-
     //Check for Expired Token
     const currentTime = Date.now() / 1000;
-    if (decoded.exp < currentTime){
+    if (decoded.exp < currentTime) {
         // Logout Company
         store.dispatch(logOutCompany());
 
@@ -103,6 +101,34 @@ if (localStorage.Company){
 
 
     }
+}
+
+// Check for Token for Admin
+// Check for token
+    if (localStorage.Admin){
+        //Set auth token header auth
+        setAuthToken(localStorage.Admin);
+        //Decode Token & User Info & Expiry time
+        const decoded = jwt_decode(localStorage.Admin);
+        // Set user and isAuthenticated
+        store.dispatch(setCurrentAdmin(decoded));
+
+
+
+        //Check for Expired Token
+        const currentTime = Date.now() / 1000;
+        if (decoded.exp < currentTime){
+            // Logout Company
+            store.dispatch(logOutAdmin());
+
+            // Clear Portfolio
+            //store.dispatch(clearCurrentPortfolio());
+
+            // Redirect to login
+            window.location.href = '/admin-login';
+
+
+        }
 
 }
 
@@ -173,6 +199,11 @@ class App extends Component {
                       </Switch>
 
                   </div>
+                  <div className="container">
+                      <Route exact path="/admin-register" component={AdminRegister}/>
+                      <Route exact path="/admin-login" component={AdminLogin}/>
+                  </div>
+
                   <Footer/>
               </div>
             </Router>

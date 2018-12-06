@@ -29,7 +29,7 @@ class SinglePost extends Component {
                     <PostItem post={post} showActions ={false} />
                     <CommentForm postId={post._id} />
                     //show applied feed here
-                    <CommentFeed postId={post._id} comments={post.comments}/>
+                    <CommentFeed postId={post._id} applied={post.applied}/>
                 </div>
             );
         }
