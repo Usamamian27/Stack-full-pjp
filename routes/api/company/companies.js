@@ -10,8 +10,8 @@ const passport = require('passport');
 const Company = require('../../../models/Company');
 
 // Load Input validations
-const validateRegisterInput = require ('../../../validations/register');
-const validateLoginInput = require('../../../validations/login');
+const validateRegisterInputCompany = require ('../../../validations/register-company');
+const validateLoginInputCompany = require('../../../validations/login-company');
 
 // route Get api/users/test
 router.get('/test',(req,res)=>{
@@ -24,10 +24,10 @@ router.get('/test',(req,res)=>{
 //access public
 router.post('/register',(req,res)=>{
 
-    const {errors , isValid} = validateRegisterInput(req.body);
+    const {errorsCompany , isValid} = validateRegisterInputCompany(req.body);
     //Check  Validations
     if(!isValid){
-        return res.status(400).json(errors);
+        return res.status(400).json(errorsCompany);
     }
 
     Company.findOne({ email : req.body.email })
@@ -71,11 +71,11 @@ router.post('/register',(req,res)=>{
 // Public
 
 router.post('/login',(req,res)=>{
-    
-    const {errors , isValid} = validateLoginInput(req.body);
+
+    const {errorsCompany , isValid} = validateLoginInputCompany(req.body);
     // Check  Validations
     if(!isValid){
-        return res.status(400).json(errors);
+        return res.status(400).json(errorsCompany);
     }
 
     const email = req.body.email;
@@ -122,7 +122,7 @@ router.post('/login',(req,res)=>{
 // desc return current company
 // access private
 router.get('/current',passport.authenticate('Company', { session : false}),(req,res)=>{
-    
+
     // sending only specific fields of our choice
     res.json({
         id:req.user.id,

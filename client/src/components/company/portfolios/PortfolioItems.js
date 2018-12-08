@@ -8,17 +8,18 @@ class ProfileItem extends Component {
         const {portfolio} = this.props;
 
         return (
-            <div className="card card-body bg-light mb-3">
-                <div className="row">
-                    <div className="col-2">
+            <div className="card  bg-light mb-3 ml-3 float-left" style={{width:200,height:300}}>
+                <div className="card-body">
+
                         <Link to={portfolio.user.avatar}>
-                            <img className="rounded-circle"
+                            <img className="rounded-circle ml-4"
                                  src={portfolio.user.avatar}
+                                 style={{width:100,height:100}}
                                  alt=""/>
                         </Link>
-                    </div>
 
-                    <div className="col-lg-6 col-md-4 col-8">
+
+                    <div className="text-center">
                         <h3>{portfolio.user.name}</h3>
 
                         <p>

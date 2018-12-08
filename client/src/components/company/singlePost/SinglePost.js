@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom';
 import Spinner from '../../common/Spinner';
 import {getpost} from "../../../actions/postActions";
 import PostItem from '../posts/PostItems';
-import CommentForm from './CommentForm';
 import CommentFeed from "./CommentFeed";
+
 
 class SinglePost extends Component {
 
@@ -18,6 +18,18 @@ class SinglePost extends Component {
         const {auth,authCompany} = this.props;
 
         let postContent;
+        const shortLinks = (
+            <div className="btn-group mb-4" role="group">
+                <Link to="#!" className="btn btn-light">
+                    <i className="fas fa-user-circle text-info mr-1"></i>
+                    All Applicants
+                </Link>
+                <Link to={`/shortlisted/${post._id}`} className="btn btn-light">
+                    <i className="fas fa-user-circle text-info mr-1"></i>
+                    Shortlisted Applicants
+                </Link>
+            </div>
+        );
 
         if(post === null || loading || Object.keys(post).length === 0){
             postContent = <Spinner/>;
@@ -27,8 +39,7 @@ class SinglePost extends Component {
             postContent = (
                 <div>
                     <PostItem post={post} showActions ={false} />
-                    <CommentForm postId={post._id} />
-                    //show applied feed here
+                    {shortLinks}
                     <CommentFeed postId={post._id} applied={post.applied}/>
                 </div>
             );

@@ -40,6 +40,7 @@ import {clearCurrentPortfolio} from "./actions/portfolioActions";
 import Portfolios from "./components/company/portfolios/Portfolios";
 import Posts from './components/company/posts/Posts';
 import SinglePost from "./components/company/singlePost/SinglePost";
+import Shortlisted from "./components/company/singlePost/Shortlisted";
 import PrivateRouteCompany from './components/common/PrivateRouteCompany';
 
 // Admin Stuff
@@ -197,6 +198,10 @@ class App extends Component {
                       <Switch>
                           <PrivateRouteCompany exact path="/post/:id" component={SinglePost} />
                       </Switch>
+                      <Switch>
+                          <PrivateRouteCompany exact path="/shortlisted/:id" component={Shortlisted} />
+                      </Switch>
+
 
                   </div>
                   <div className="container">

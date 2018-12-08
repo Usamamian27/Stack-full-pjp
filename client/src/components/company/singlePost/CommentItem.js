@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {deleteComment} from '../../../actions/postActions';
 import {showProfile} from "../../../actions/profileAcions";
+import {addShortlist} from "../../../actions/postActions";
 import {Link } from 'react-router-dom';
 
 class CommentItem extends Component {
@@ -17,13 +18,19 @@ class CommentItem extends Component {
     onViewProfile(id){
         this.props.showProfile(id);
     }
+    onShortlistClicked(id,postId){
+        this.props.addShortlist(id,postId);
+
+    }
 
     render() {
 
         const {apply , postId , authCompany,auth} = this.props;
         return (
-            <div className="card  mb-3 mr-3 float-left" style={{width:200}}>
-                <div className="card-body" >
+            <div>
+
+                <div className="card  mb-3 mr-3 float-left" style={{width:200}}>
+                    <div className="card-body" >
 
                         <Link to="#!">
                             <img
@@ -36,54 +43,63 @@ class CommentItem extends Component {
                         <h4 className="card-title text-center">{apply.name}</h4>
                         <Link
                             onClick={this.onViewProfile.bind(this,apply.user)}
-                            className="btn btn-primary ml-4 "
+                            className="btn btn-primary ml-4 mb-2 "
                             to="/show-profile"
                         >
                             View Profile
                         </Link>
+                        <Link
+                            onClick={this.onShortlistClicked.bind(this,apply.user,postId)}
+                            className="btn btn-primary ml-4 "
+                            to="#!"
+                        >
+                            Shortlisted
+                        </Link>
 
-                    {/*<div className="col-md-10">*/}
+                        {/*<div className="col-md-10">*/}
                         {/*/!*<p className="lead">{applicants.text}</p>*!/*/}
                         {/*/!*{comment.user === authCompany.company.id ? (*!/*/}
-                            {/*/!*<button*!/*/}
-                                {/*/!*onClick={this.onDeleteClick.bind(this, postId, comment._id)}*!/*/}
-                                {/*/!*type="button"*!/*/}
-                                {/*/!*className="btn btn-danger mr-1"*!/*/}
-                            {/*/!*>*!/*/}
-                                {/*/!*<i className="fas fa-times" />*!/*/}
-                            {/*/!*</button>*!/*/}
+                        {/*/!*<button*!/*/}
+                        {/*/!*onClick={this.onDeleteClick.bind(this, postId, comment._id)}*!/*/}
+                        {/*/!*type="button"*!/*/}
+                        {/*/!*className="btn btn-danger mr-1"*!/*/}
+                        {/*/!*>*!/*/}
+                        {/*/!*<i className="fas fa-times" />*!/*/}
+                        {/*/!*</button>*!/*/}
 
                         {/*/!*) :*!/*/}
-                            {/*/!*null*!/*/}
+                        {/*/!*null*!/*/}
                         {/*/!*}*!/*/}
 
 
 
 
                         {/*/!*{comment.user === auth.user.id ? (*!/*/}
-                            {/*/!*<span>*!/*/}
-                                {/*/!*<button*!/*/}
-                                    {/*/!*onClick={this.onDeleteClick.bind(this, postId, comment._id)}*!/*/}
-                                    {/*/!*type="button"*!/*/}
-                                    {/*/!*className="btn btn-danger mr-1"*!/*/}
-                                {/*/!*>*!/*/}
-                                    {/*/!*<i className="fas fa-times" />*!/*/}
-                                {/*/!*</button>*!/*/}
+                        {/*/!*<span>*!/*/}
+                        {/*/!*<button*!/*/}
+                        {/*/!*onClick={this.onDeleteClick.bind(this, postId, comment._id)}*!/*/}
+                        {/*/!*type="button"*!/*/}
+                        {/*/!*className="btn btn-danger mr-1"*!/*/}
+                        {/*/!*>*!/*/}
+                        {/*/!*<i className="fas fa-times" />*!/*/}
+                        {/*/!*</button>*!/*/}
 
 
-                            {/*/!*</span>*!/*/}
+                        {/*/!*</span>*!/*/}
 
 
                         {/*/!*) :*!/*/}
-                            {/*/!*null*!/*/}
+                        {/*/!*null*!/*/}
                         {/*/!*}*!/*/}
 
 
 
 
-                    {/*</div>*/}
+                        {/*</div>*/}
+                    </div>
                 </div>
             </div>
+
 
         );
     }
@@ -97,5 +113,5 @@ const mapStateToProps =(state) =>({
     profile:state.profile
 });
 
-export default connect(mapStateToProps,{deleteComment,showProfile})(CommentItem);
+export default connect(mapStateToProps,{deleteComment,showProfile,addShortlist})(CommentItem);
 

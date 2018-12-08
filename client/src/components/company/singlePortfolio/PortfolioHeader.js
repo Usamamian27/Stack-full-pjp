@@ -13,6 +13,7 @@ class PortfolioHeader extends Component {
                                 <img
                                     className="rounded-circle"
                                     src={portfolio.user.avatar}
+                                    style={{width:300,height:300}}
                                     alt="Connect to wordpress"
                                 />
                             </div>

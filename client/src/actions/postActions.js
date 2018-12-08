@@ -161,6 +161,24 @@ export const deleteComment = (postId,commentId) => dispatch => {
 };
 
 
+// Short List Candidates
+
+export const addShortlist = (id,postId) => dispatch => {
+
+    axios
+        .post(`/api/company/posts/shortlist/${id}/${postId}`)
+        .then(res =>
+            dispatch(getposts())
+        )
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+
+
 
 
 // Set Loading state

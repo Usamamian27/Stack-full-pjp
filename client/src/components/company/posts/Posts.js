@@ -33,7 +33,9 @@ class Posts extends Component {
                     <div className="row">
                         <div className="col-md-12">
                             {authCompany.isCompanyAuthenticated ? (<PostForm/>) : null}
-
+                            <h2>
+                                Jobs List
+                            </h2>
                             {postContent}
 
                         </div>

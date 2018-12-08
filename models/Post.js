@@ -32,6 +32,20 @@ const PostSchema = new Schema({
             },
         }
     ],
+    shortlist:[
+        {
+            user:{
+                type:Schema.ObjectId,
+                ref:'students'
+            },
+            name:{
+                type:String
+            },
+            avatar:{
+                type:String
+            },
+        }
+    ],
     comments:[
         {
             user:{

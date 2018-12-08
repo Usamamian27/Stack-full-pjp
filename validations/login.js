@@ -20,7 +20,7 @@ module.exports = function validateLoginInput(data){
         errors.password = 'Password Field is Required';
     }
 
-    if(!data.verify){
+    if(data.verify === false){
         errors.verify = 'Not approved by admin yet!';
     }
 

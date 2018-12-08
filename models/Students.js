@@ -22,8 +22,8 @@ const StudentSchema = new Schema ({
         type:String
     },
     verify:{
-      type:Boolean,
-      default: false
+        type:Boolean,
+        default: false
     },
     date :{
         type:String,

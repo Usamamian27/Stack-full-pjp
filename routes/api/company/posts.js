@@ -10,6 +10,8 @@ const Post = require('../../../models/Post');
 const Company = require('../../../models/Company');
 //Student Model
 const Student = require('../../../models/Students');
+// CV Model
+const CV = require('../../../models/CV');
 
 
 // Validation for Post
@@ -270,6 +272,41 @@ router.delete('/comment/:id/:comment_id',passposrt.authenticate(['Company','Stud
             .catch(err => res.status(404).json({nopostfound:'No Post Found'}));
     });
 
+
+// route Post api/posts/shortlist/:id
+// desc Shortlist students
+//access private
+
+router.post('/shortlist/:id/:postID',passposrt.authenticate('Company',{session:false}),
+    (req,res)=> {
+
+        Student.findOne({user: req.params.id})
+            .then(profile => {
+
+                Post.findById(req.params.postID)
+                    .then(post => {
+
+                        const newApplicant = {
+                            name: req.user.name,
+                            avatar: req.user.avatar,
+                            user:req.params.id
+                        };
+                        if(post.shortlist.filter(apply => apply.user.toString() === req.params.id).length > 0){
+                            return res.status((400).json({alreadyApplied:'User already applied to this post'}))
+                        }
+                        // Add user id to apply array to apply to the post
+                        post.shortlist.unshift(newApplicant);
+                        // save to mongoDB
+                        post.save().then(post => res.json(post) );
+
+                    })
+                    .catch(err => res.status(404).json({postNotfound:'No Post Found'}));
+
+                return res.json({msg:'mil gya bc'})
+             }).catch(err => res.status(400).json({postNotfound:'No Post Found'}) )
+        ;
+
+    });
 
 
 
