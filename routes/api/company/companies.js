@@ -97,7 +97,8 @@ router.post('/login',(req,res)=>{
                         const payload_c ={
                             id:company.id,
                             name:company.name,
-                            avatar:company.avatar
+                            avatar:company.avatar,
+                            email:company.email
                         };
                         // sign token
                         jwt.sign(

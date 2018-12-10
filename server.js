@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser =require('body-parser');
 const passport = require('passport');
+const path =    require('path');
 
 const students = require('./routes/api/student/students');
 const cv = require('./routes/api/student/cv');
@@ -45,6 +46,21 @@ app.use('/api/company/companies',company);
 app.use('/api/company/portfolio',portfolio);
 app.use('/api/company/posts',posts);
 app.use('/api/admin/admin',admin);
+
+
+
+
+// Server static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static(path.join(__dirname, 'client/build')));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname + '/client/build/index.html'))
+    })
+}
+
+
 
 
 

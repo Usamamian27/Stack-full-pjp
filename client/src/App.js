@@ -41,6 +41,7 @@ import Portfolios from "./components/company/portfolios/Portfolios";
 import Posts from './components/company/posts/Posts';
 import SinglePost from "./components/company/singlePost/SinglePost";
 import Shortlisted from "./components/company/singlePost/Shortlisted";
+import EmailForm from "./components/company/EmailSending/EmailForm";
 import PrivateRouteCompany from './components/common/PrivateRouteCompany';
 
 // Admin Stuff
@@ -201,6 +202,10 @@ class App extends Component {
                       <Switch>
                           <PrivateRouteCompany exact path="/shortlisted/:id" component={Shortlisted} />
                       </Switch>
+                      <Switch>
+                          <PrivateRouteCompany exact path="/send-email" component={EmailForm} />
+                      </Switch>
+
 
 
                   </div>

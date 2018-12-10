@@ -1,9 +1,11 @@
 // authentication info
+
+
 const express = require('express');
 const router = express.Router();
 const mongoose =require('mongoose');
 const passposrt = require('passport');
-
+const nodemailer = require('nodemailer');
 // Post Model
 const Post = require('../../../models/Post');
 //Company Model
@@ -53,6 +55,7 @@ router.post('/',passposrt.authenticate('Company',{session:false}),(req,res)=>{
         text:req.body.text,
         name:req.body.name,
         avatar:req.body.avatar,
+        email:req.user.email,
         title:req.body.title,
         experience:req.body.experience,
         skills:req.body.skills,
@@ -110,6 +113,7 @@ router.post('/apply/:id',passposrt.authenticate('Student',{session:false}),
                     const newApplicant = {
                         name: req.user.name,
                         avatar: req.user.avatar,
+                        email:req.user.email,
                         user:req.user.id
                     };
                     if(post.applied.filter(apply => apply.user.toString() === req.user.id).length > 0){
@@ -230,35 +234,6 @@ router.delete('/comment/:id/:comment_id',passposrt.authenticate(['Company','Stud
                     return res.status(404).json({commentnotexist:'Comment not Exist'});
                 }
 
-                // if(post.comments.filter(comment => comment.student.toString() === req.user.id)){
-                //     // get an index to remove
-                //             const removeIndex = post.comments
-                //             .map(item => item._id.toString())
-                //             .indexOf(req.params.comment_id);
-
-                //         // Splice out of array
-                //         post.comments.splice(removeIndex,1);
-                //         //save
-                //         post.save().then(post => res.json(post));
-                // }else{
-                //     return res.status((400).json({msg:'Not Authenticated'}));
-                // }
-
-                // if(post.comments.filter(comment => comment.user.toString() === req.user.id)){
-                //     // get an index to remove
-                //     const removeIndex = post.comments
-                //         .map(item => item._id.toString())
-                //         .indexOf(req.params.comment_id);
-
-                //     // Splice out of array
-                //     post.comments.splice(removeIndex,1);
-                //     //save
-                //     post.save().then(post => res.json(post));
-                // }else{
-                //     return res.status((400).json({msg:'Not Authenticated'}));
-                // }
-
-
                 //get an index to remove
                     const removeIndex = post.comments
                         .map(item => item._id.toString())
@@ -289,6 +264,7 @@ router.post('/shortlist/:id/:postID',passposrt.authenticate('Company',{session:f
                         const newApplicant = {
                             name: req.user.name,
                             avatar: req.user.avatar,
+                            email:req.user.email,
                             user:req.params.id
                         };
                         if(post.shortlist.filter(apply => apply.user.toString() === req.params.id).length > 0){
@@ -307,6 +283,60 @@ router.post('/shortlist/:id/:postID',passposrt.authenticate('Company',{session:f
         ;
 
     });
+
+
+
+// desc Send Email
+//access private
+
+router.post('/send-email',passposrt.authenticate('Company',{session:false}),
+    (req,res)=> {
+
+        const output = `
+        <p>You have a new message</p>
+        <h3>Message Details</h3>
+        <ul>  
+          <li>Name: ${req.body.name}</li>
+          <li>Sender: ${req.body.sender}</li>
+        </ul>
+        <h3>Message</h3>
+        <p>${req.body.msg}</p>`;
+
+        // create reusable transporter object using the default SMTP transport
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: req.body.sender,
+                pass: req.body.password
+            },
+            tls:{
+                rejectUnauthorized:false
+            }
+
+        });
+
+        // setup email data with unicode symbols
+        let mailOptions = {
+            from:req.body.sender, // sender address
+            to:req.body.email , // list of receivers
+            subject: 'Node Contact Request', // Subject line
+            text: req.body.msg, // plain text body
+            html: output // html body
+        };
+
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return console.log(error);
+            }
+            console.log('Message sent: %s', info.messageId);
+            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+        });
+});
+
+
+
+
 
 
 

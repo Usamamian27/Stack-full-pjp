@@ -18,6 +18,9 @@ const PostSchema = new Schema({
     avatar:{
        type:String
     },
+    email:{
+       type:String
+    },
     applied:[
         {
             user:{
@@ -30,6 +33,9 @@ const PostSchema = new Schema({
             avatar:{
                 type:String
             },
+            email:{
+                type:String
+            }
         }
     ],
     shortlist:[
@@ -44,6 +50,9 @@ const PostSchema = new Schema({
             avatar:{
                 type:String
             },
+            email:{
+                type:String
+            }
         }
     ],
     comments:[

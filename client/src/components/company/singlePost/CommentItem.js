@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {deleteComment} from '../../../actions/postActions';
 import {showProfile} from "../../../actions/profileAcions";
 import {addShortlist} from "../../../actions/postActions";
+import EmailForm from "../EmailSending/EmailForm";
 import {Link } from 'react-router-dom';
 
 class CommentItem extends Component {
@@ -26,6 +27,7 @@ class CommentItem extends Component {
     render() {
 
         const {apply , postId , authCompany,auth} = this.props;
+        const {sender} = this.props.post;
         return (
             <div>
 
@@ -41,6 +43,7 @@ class CommentItem extends Component {
                             />
                         </Link>
                         <h4 className="card-title text-center">{apply.name}</h4>
+                        <p className="text-center">{apply.email}</p>
                         <Link
                             onClick={this.onViewProfile.bind(this,apply.user)}
                             className="btn btn-primary ml-4 mb-2 "
@@ -49,53 +52,20 @@ class CommentItem extends Component {
                             View Profile
                         </Link>
                         <Link
+                            className="btn btn-primary ml-4 mb-2"
+                            to="/send-email"
+                        >
+                            Send Email
+                        </Link>
+
+                        <Link
                             onClick={this.onShortlistClicked.bind(this,apply.user,postId)}
                             className="btn btn-primary ml-4 "
                             to="#!"
                         >
-                            Shortlisted
+                            Shortlist
                         </Link>
 
-                        {/*<div className="col-md-10">*/}
-                        {/*/!*<p className="lead">{applicants.text}</p>*!/*/}
-                        {/*/!*{comment.user === authCompany.company.id ? (*!/*/}
-                        {/*/!*<button*!/*/}
-                        {/*/!*onClick={this.onDeleteClick.bind(this, postId, comment._id)}*!/*/}
-                        {/*/!*type="button"*!/*/}
-                        {/*/!*className="btn btn-danger mr-1"*!/*/}
-                        {/*/!*>*!/*/}
-                        {/*/!*<i className="fas fa-times" />*!/*/}
-                        {/*/!*</button>*!/*/}
-
-                        {/*/!*) :*!/*/}
-                        {/*/!*null*!/*/}
-                        {/*/!*}*!/*/}
-
-
-
-
-                        {/*/!*{comment.user === auth.user.id ? (*!/*/}
-                        {/*/!*<span>*!/*/}
-                        {/*/!*<button*!/*/}
-                        {/*/!*onClick={this.onDeleteClick.bind(this, postId, comment._id)}*!/*/}
-                        {/*/!*type="button"*!/*/}
-                        {/*/!*className="btn btn-danger mr-1"*!/*/}
-                        {/*/!*>*!/*/}
-                        {/*/!*<i className="fas fa-times" />*!/*/}
-                        {/*/!*</button>*!/*/}
-
-
-                        {/*/!*</span>*!/*/}
-
-
-                        {/*/!*) :*!/*/}
-                        {/*/!*null*!/*/}
-                        {/*/!*}*!/*/}
-
-
-
-
-                        {/*</div>*/}
                     </div>
                 </div>
             </div>
@@ -110,7 +80,8 @@ const mapStateToProps =(state) =>({
     authCompany : state.authCompany,
     portfolio : state.portfolio,
     auth:state.auth,
-    profile:state.profile
+    profile:state.profile,
+    post:state.post
 });
 
 export default connect(mapStateToProps,{deleteComment,showProfile,addShortlist})(CommentItem);

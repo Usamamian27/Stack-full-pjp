@@ -105,21 +105,7 @@ export const addLike = (id) => dispatch => {
         );
 };
 
-// //Remove likes
-// export const removeLike = (id) => dispatch => {
-//
-//     axios
-//         .post(`/api/company/posts/unlike/${id}`)
-//         .then(res =>
-//             dispatch(getposts())
-//         )
-//         .catch(err =>
-//             dispatch({
-//                 type: GET_ERRORS,
-//                 payload: err.response.data
-//             })
-//         );
-// };
+
 
 //Add Comments
 export const addComment = (postId,commentData) => dispatch => {
@@ -177,6 +163,22 @@ export const addShortlist = (id,postId) => dispatch => {
             })
         );
 };
+
+// Send email to candidate
+
+export const emailCandidate = (data,history) =>dispatch =>{
+
+    axios.post('/api/company/posts/send-email',data)
+        .then(res => history.push('/employer-dashboard'))
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+
+};
+
 
 
 
