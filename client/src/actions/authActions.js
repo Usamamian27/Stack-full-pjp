@@ -131,7 +131,7 @@ export const registerAdmin =(AdminData,history)=> dispatch=>{
         );
 };
 
-//login Company
+//login Admin
 export const loginAdmin = (AdminData) =>dispatch =>{
     axios.post('/api/admin/admin/login',AdminData)
         .then(res => {
@@ -153,6 +153,14 @@ export const loginAdmin = (AdminData) =>dispatch =>{
                 payload: err.response.data
             }) )
 };
+
+
+
+
+
+
+
+
 
 // Log Company out
 export const logOutAdmin = () => dispatch => {

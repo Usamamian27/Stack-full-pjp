@@ -47,9 +47,11 @@ import PrivateRouteCompany from './components/common/PrivateRouteCompany';
 // Admin Stuff
 import AdminLogin from './components/admin/AdminLogin';
 import AdminRegister from './components/admin/AdminRegister';
-
 import {setCurrentAdmin} from "./actions/authActions";
 import {logOutAdmin} from "./actions/authActions";
+import PrivateRouteAdmin from './components/common/PrivateRouteAdmin';
+import AdminDashboard from './components/admin/dashboard/AdminDashboard';
+import Approvals from './components/admin/dashboard/Approvals';
 
 
 // Check for Student's token
@@ -212,7 +214,14 @@ class App extends Component {
                   <div className="container">
                       <Route exact path="/admin-register" component={AdminRegister}/>
                       <Route exact path="/admin-login" component={AdminLogin}/>
+                      <Switch>
+                          <PrivateRouteAdmin exact path="/admin-dashboard" component={AdminDashboard} />
+                      </Switch>
+                      <Switch>
+                          <PrivateRouteAdmin exact path="/approvals" component={Approvals} />
+                      </Switch>
                   </div>
+
 
                   <Footer/>
               </div>

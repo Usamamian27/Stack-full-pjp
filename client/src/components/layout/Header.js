@@ -125,7 +125,7 @@ class Header extends Component {
         const authAdminLinks = (
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                    <Link className="nav-link" to="/employer-dashboard">
+                    <Link className="nav-link" to="/admin-dashboard">
                         Dashboard
                     </Link>
                 </li>

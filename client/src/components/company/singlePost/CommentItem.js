@@ -29,7 +29,7 @@ class CommentItem extends Component {
         const {apply , postId , authCompany,auth} = this.props;
         const {sender} = this.props.post;
         return (
-            <div>
+            <div className="zoom">
 
                 <div className="card  mb-3 mr-3 float-left" style={{width:200}}>
                     <div className="card-body" >

@@ -22,5 +22,7 @@ export const DELETE_POST = 'DELETE_POST';
 
 export const SET_CURRENT_ADMIN = 'SET_CURRENT_ADMIN';
 
+export const GET_ALL_APPROVALS = 'GET_ALL_APPROVALS';
+
 
 

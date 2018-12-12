@@ -93,6 +93,9 @@ router.post('/login',(req,res)=>{
             if (!user){
                 return res.status(404).json({email:'User Not Found'});
             }
+            if (user.verify === false){
+                return res.status(404).json({verify:'Not Approved by Admin yet'});
+            }
             // Check  password
             bcrypt.compare(password,user.password)
                 .then(isMatch=> {

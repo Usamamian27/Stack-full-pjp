@@ -6,7 +6,7 @@ import {
     CLEAR_CURRENT_PROFILE,
     GET_ERRORS,
     SET_CURRENT_USER,
-    GET_PROFILES
+    GET_PROFILES, GET_ALL_APPROVALS
 } from './types';
 
 // Get current profile
@@ -234,4 +234,39 @@ export const clearCurrentProfile = () => {
     return {
         type: CLEAR_CURRENT_PROFILE
     };
+};
+
+
+// Get All Approvals
+export const getApprovals =() => dispatch => {
+    axios
+        .get('/api/admin/admin/approvals')
+        .then(res =>
+            dispatch({
+                type: GET_ALL_APPROVALS,
+                payload: res.data
+            })
+        )
+        .catch(err =>
+            dispatch({
+                type: GET_ALL_APPROVALS,
+                payload: null
+            })
+        );
+};
+
+
+// Get All Approvals
+export const approveRequest =(id) => dispatch => {
+    axios
+        .get(`/api/admin/admin/approvals/${id}`)
+        .then(res =>
+            dispatch(getApprovals())
+        )
+        .catch(err =>
+            dispatch({
+                type: GET_ALL_APPROVALS,
+                payload: null
+            })
+        );
 };

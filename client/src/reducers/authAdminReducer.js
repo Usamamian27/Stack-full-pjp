@@ -1,10 +1,12 @@
-import {SET_CURRENT_ADMIN} from "../actions/types";
+import {SET_CURRENT_ADMIN,GET_ALL_APPROVALS} from "../actions/types";
 import isEmpty from '../validations/isEmpty';
 
 
 const initialState ={
     isAdminAuthenticated : false,
-    admin: {}
+    admin: {},
+    approvals:{},
+    loading:false
 };
 
 export default function(state = initialState , action){
@@ -14,6 +16,12 @@ export default function(state = initialState , action){
                 ...state,
                 isAdminAuthenticated: !isEmpty(action.payload),
                 admin:action.payload
+            };
+        case GET_ALL_APPROVALS:
+            return {
+                ...state,
+                approvals: action.payload,
+                loading: false
             };
         default:
             return state;

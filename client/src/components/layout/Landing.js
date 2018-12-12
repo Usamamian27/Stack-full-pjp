@@ -15,6 +15,9 @@ class Landing extends Component {
         else if(this.props.authCompany.isCompanyAuthenticated){
             this.props.history.push('/employer-dashboard');
         }
+        else if(this.props.authAdmin.isAdminAuthenticated){
+            this.props.history.push('/admin-dashboard');
+        }
     }
 
     render() {
@@ -42,6 +45,7 @@ class Landing extends Component {
 
 const mapStateToProps = (state) =>({
     auth : state.auth,
-    authCompany:state.authCompany
+    authCompany:state.authCompany,
+    authAdmin:state.authAdmin
 });
 export default connect(mapStateToProps)(Landing);

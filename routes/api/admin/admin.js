@@ -6,8 +6,10 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../../Config/keys');
 const passport = require('passport');
 
-// Load Company model
+// Load Admin model
 const Admin = require('../../../models/Admin');
+//load Student Model
+const Student = require('../../../models/Students');
 
 // Load Input validations
 const validateAdminLoginInput = require('../../../validations/admin-login');
@@ -123,5 +125,42 @@ router.get('/current',passport.authenticate('Admin', { session : false}),(req,re
         });
     }
 );
+
+// get all pending requests
+// access private
+router.get('/approvals',passport.authenticate('Admin',{session :false}),(req,res)=>{
+
+    Student.find()
+        .then(
+            student =>{
+                if(student.verify === true){
+                    return res.status(404).json({msg:'No pending requests'});
+
+                }
+                res.json(student);
+
+            }
+
+        )
+        .catch(err => res.status(404).json({student:'No pending approvals'}));
+});
+
+
+// approve request
+// access private
+router.post('/approvals/:id',passport.authenticate('Admin',{session:false}),(req,res)=>{
+
+    Student.findById(req.params.id)
+        .then(student =>{
+            if(student.verify === false){
+                student.verify = true;
+                student.save().then(student => res.json(student))
+            }
+        })
+        .catch(err => res.status(404).json({Notfound:'No Student Found'}));
+
+
+});
+
 
 module.exports = router;

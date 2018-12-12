@@ -40,7 +40,7 @@ module.exports = (passport)=> {
 
     passport.use('Admin',new JwtStrategy(opts,(jwt_payload , done )=>{
         console.log('Speaking from Admin Stratergy');
-        Company.findById(jwt_payload.id)
+        Admin.findById(jwt_payload.id)
             .then(user=>{
                 if(user){
                     return done(null,user);
