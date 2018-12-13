@@ -2,22 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e6af3ed-c707-4295-a345-a4dd1064c184" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/actions/portfolioActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/actions/portfolioActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/actions/profileAcions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/actions/profileAcions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/admin/dashboard/AdminDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/admin/dashboard/AdminDashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/admin/dashboard/ApprovalItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/admin/dashboard/ApprovalItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/admin/dashboard/Approvals.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/admin/dashboard/Approvals.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/company/EmailSending/EmailForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/company/EmailSending/EmailForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/company/portfolios/PortfolioItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/company/portfolios/PortfolioItems.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/company/posts/Posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/company/posts/Posts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/company/singlePortfolio/PortfolioHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/company/singlePortfolio/PortfolioHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/company/singlePost/CommentItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/company/singlePost/CommentItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/company/singlePost/Shortlisted.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/company/singlePost/Shortlisted.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/company/singlePost/ShortlistedItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/company/singlePost/ShortlistedItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/layout/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/singleProfile/ProfileHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/singleProfile/ProfileHeader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -132,8 +116,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+            <state relative-caret-position="598">
+              <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -385,12 +369,12 @@
       <workItem from="1544257813821" duration="19634000" />
       <workItem from="1544436951881" duration="16762000" />
       <workItem from="1544609692322" duration="14456000" />
-      <workItem from="1544696450064" duration="3705000" />
+      <workItem from="1544696450064" duration="4392000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="244895000" />
+    <option name="totallyTimeSpent" value="245582000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="960" y="0" width="960" height="1040" extended-state="0" />
@@ -830,8 +814,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+        <state relative-caret-position="598">
+          <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
         </state>
       </provider>
     </entry>
