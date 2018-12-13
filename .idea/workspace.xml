@@ -39,7 +39,7 @@
           <entry key="css" value="29" />
           <entry key="gitignore" value="1" />
           <entry key="html" value="5" />
-          <entry key="js" value="462" />
+          <entry key="js" value="464" />
           <entry key="json" value="15" />
           <entry key="png" value="1" />
         </counts>
@@ -50,7 +50,7 @@
           <entry key="HTML" value="5" />
           <entry key="Image" value="1" />
           <entry key="JSON" value="15" />
-          <entry key="JavaScript" value="462" />
+          <entry key="JavaScript" value="464" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
@@ -74,11 +74,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="575">
               <caret line="25" column="13" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-138">
+              <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -241,6 +250,12 @@
             <path>
               <item name="PUCIT JOB PORTAL" type="b2602c69:ProjectViewProjectNode" />
               <item name="PUCIT JOB PORTAL" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PUCIT JOB PORTAL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PUCIT JOB PORTAL" type="462c0819:PsiDirectoryNode" />
               <item name="Config" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -329,16 +344,15 @@
       <workItem from="1544257813821" duration="19634000" />
       <workItem from="1544436951881" duration="16762000" />
       <workItem from="1544609692322" duration="14456000" />
-      <workItem from="1544696450064" duration="8100000" />
+      <workItem from="1544696450064" duration="8606000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="249290000" />
+    <option name="totallyTimeSpent" value="249796000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17544784" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -385,13 +399,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/routes/api/student/students.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-367">
-          <caret line="96" column="52" selection-start-line="96" selection-start-column="52" selection-end-line="96" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/actions/authActions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="553">
@@ -720,13 +727,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="23" column="44" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/actions/portfolioActions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1356">
@@ -779,6 +779,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="575">
           <caret line="25" column="13" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/node_modules/internal-ip/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-642" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-138">
+          <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
         </state>
       </provider>
     </entry>
