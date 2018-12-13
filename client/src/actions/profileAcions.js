@@ -259,7 +259,7 @@ export const getApprovals =() => dispatch => {
 // Get All Approvals
 export const approveRequest =(id) => dispatch => {
     axios
-        .get(`/api/admin/admin/approvals/${id}`)
+        .post(`/api/admin/admin/approvals/${id}`)
         .then(res =>
             dispatch(getApprovals())
         )

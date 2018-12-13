@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 import Spinner from '../../common/Spinner';
 import {getpost} from "../../../actions/postActions";
 import PostItem from '../posts/PostItems';
-import ShortlistedItem from './ShortlistedItem';
 import ShortlistedFeed from './ShortlistFeed';
 
 class Shortlisted extends Component {

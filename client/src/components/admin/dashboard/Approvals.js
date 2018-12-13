@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getApprovals} from "../../../actions/profileAcions";
-import {Link} from "react-router-dom";
 import Spinner from "../../common/Spinner";
 import ApprovalItem from './ApprovalItem';
 

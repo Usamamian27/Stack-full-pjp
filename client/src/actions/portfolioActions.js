@@ -5,7 +5,6 @@ import {
     PORTFOLIO_LOADING,
     CLEAR_CURRENT_PORTFOLIO,
     GET_ERRORS,
-    SET_CURRENT_COMPANY,
     GET_PORTFOLIOS
 } from './types';
 

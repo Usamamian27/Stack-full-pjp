@@ -8,7 +8,8 @@ class ProfileItem extends Component {
         const {portfolio} = this.props;
 
         return (
-            <div className="card  bg-light mb-3 ml-3 float-left" style={{width:200,height:300}}>
+
+            <div className="zoom card  bg-light mb-3 ml-3 float-left" style={{width:200,height:300}}>
                 <div className="card-body">
 
                         <Link to={portfolio.user.avatar}>

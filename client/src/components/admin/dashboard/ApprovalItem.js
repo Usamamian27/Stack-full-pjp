@@ -7,12 +7,13 @@ class ApprovalItem extends Component {
 
     onApproveClick=(id)=>{
         this.props.approveRequest(id);
-    }
+    };
 
     render() {
         const {approval} = this.props;
-        return (
-            <div>
+        let items;
+        items = (
+
                 <div className="card  mb-3 mr-3 float-left" style={{width: 200, height: 300}}>
                     <div className="card-body">
                         <Link
@@ -27,11 +28,11 @@ class ApprovalItem extends Component {
                             <h3>{approval.name}</h3>
                         </div>
                         <div className="text-center">
-                                <small>{approval.email}</small>
+                            <small>{approval.email}</small>
                         </div>
                         <div className="text-center">
                             <Link
-                                onClick={this.onApproveClick.bind(approval._id)}
+                                onClick={this.onApproveClick.bind(this,approval._id)}
                                 className="btn btn-danger"
                                 to="#!"
                             >
@@ -43,7 +44,14 @@ class ApprovalItem extends Component {
 
                 </div>
 
+
+        );
+
+        return (
+            <div>
+                {approval.verify ? null : items}
             </div>
+
         )
     }
 }

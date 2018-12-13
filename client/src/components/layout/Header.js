@@ -178,7 +178,8 @@ class Header extends Component {
                         </ul>
 
                         {isAuthenticated ? authLinks : (isCompanyAuthenticated ? authCompanyLinks : (isAdminAuthenticated ? authAdminLinks : null))}
-                        {guestLinks}
+                        {isAuthenticated ? null : (isCompanyAuthenticated ? null : (isAdminAuthenticated ? null : guestLinks))}
+
                     </div>
                 </div>
             </nav>

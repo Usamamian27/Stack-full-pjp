@@ -17,7 +17,7 @@ class ShortlistedItem extends Component {
 
     render() {
 
-        const {short , postId , authCompany,auth} = this.props;
+        const {short} = this.props;
         return (
             <div>
 

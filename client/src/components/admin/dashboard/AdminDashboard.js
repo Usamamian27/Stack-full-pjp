@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import Approvals from './Approvals';
 import {connect} from 'react-redux';
-import ProfileActions from "../../Dashboard/profileActions";
 import Spinner from "../../common/Spinner";
 
 
@@ -22,8 +20,6 @@ class AdminDashboard extends Component {
                         <i className="fas fa-user-circle text-info mr-1"></i>
                         Pending Approvals
                     </Link>
-
-                    <Approvals/>
                 </div>
 
             );

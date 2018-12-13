@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {deleteComment} from '../../../actions/postActions';
 import {showProfile} from "../../../actions/profileAcions";
 import {addShortlist} from "../../../actions/postActions";
-import EmailForm from "../EmailSending/EmailForm";
 import {Link } from 'react-router-dom';
 
 class CommentItem extends Component {
@@ -26,8 +25,7 @@ class CommentItem extends Component {
 
     render() {
 
-        const {apply , postId , authCompany,auth} = this.props;
-        const {sender} = this.props.post;
+        const {apply , postId} = this.props;
         return (
             <div className="zoom">
 

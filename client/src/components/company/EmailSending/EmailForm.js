@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link } from 'react-router-dom';
-import {addShortlist, deleteComment} from "../../../actions/postActions";
-import {showProfile} from "../../../actions/profileAcions";
 import {withRouter} from 'react-router-dom';
 import {emailCandidate} from "../../../actions/postActions";
 

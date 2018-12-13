@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PostForm from './PostForm';
-//import PostFeed from './PostFeed';
 import Spinner from '../../common/Spinner';
 import { getposts } from '../../../actions/postActions';
 import PostFeed from'./PostFeed';
@@ -15,7 +14,7 @@ class Posts extends Component {
 
 
         const {posts , loading} = this.props.post;
-        const {authCompany,auth} = this.props;
+        const {authCompany} = this.props;
 
 
         let postContent;
