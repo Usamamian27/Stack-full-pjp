@@ -22,8 +22,8 @@ class EmployerLanding extends Component {
                                 <p className="lead"> Create a portfolio, Find a Candidate
                                 </p>
                                 <hr/>
-                                <Link to="/employer-register" className="btn btn-lg btn-info mr-2">Sign Up</Link>
-                                <Link to="/employer-login" className="btn btn-lg btn-light">Login</Link>
+                                <Link to="/employer-register" className="btn btn-lg btn-outline-info mr-2">Sign Up</Link>
+                                <Link to="/employer-login" className="btn btn-lg btn-outline-light">Login</Link>
                             </div>
                         </div>
                     </div>

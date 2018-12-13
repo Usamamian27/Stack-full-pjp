@@ -28,6 +28,7 @@ const InputGroup = ({
                 name={name}
                 value={value}
                 onChange={onChange}
+                type={type}
             />
             {// it is a feedback if there occurs an error
             }

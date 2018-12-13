@@ -51,17 +51,6 @@ img {
     padding:1em;
 }
 
-.container{
-    max-width:1170px;
-    margin-left:auto;
-    margin-right:auto;
-    padding:1em;
-}
-
-ul{
-    list-style: none;
-    padding:0;
-}
 
 .brand{
     text-align: center;
