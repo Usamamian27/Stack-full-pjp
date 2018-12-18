@@ -3,7 +3,7 @@ const router = express.Router();
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const keys = require('../../../Config/keys');
+const keys = require('../../../config/keys');
 const passport = require('passport');
 
 // Load Student model

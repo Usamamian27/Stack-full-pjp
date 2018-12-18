@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Student = mongoose.model('students');
 const Company = mongoose.model('companies');
 const Admin = mongoose.model('admin');
-const keys = require('../Config/keys');
+const keys = require('../config/keys');
 
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
