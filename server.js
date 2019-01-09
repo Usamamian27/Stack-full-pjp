@@ -70,8 +70,14 @@ app.get('/',(req,res)=>{
     res.send('Hello World');
 });
 
-const port = process.env.PORT || 5000;
+// const port = process.env.PORT || 5000;
 
-app.listen(port,()=>{
-    console.log(`Server Running on port ${port}`);
-});
+// app.listen(port,()=>{
+//     console.log(`Server Running on port ${port}`);
+// });
+
+app
+  .listen(process.env.PORT || 5000, () => {
+    console.log(`Server is listening at ${process.env.PORT}`);
+  })
+  .on("error", () => console.log(`error in listening at ${process.env.PORT}`));
