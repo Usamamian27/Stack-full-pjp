@@ -78,7 +78,7 @@ app.get('/',(req,res)=>{
 
 const port = process.env.PORT || 5000;
 app
-  .listen(port || 5000, () => {
+  .listen(process.env.PORT || 5000, () => {
     console.log(`Server is listening at ${port}`);
   })
   .on("error", () => console.log(`error in listening at ${port}`));
