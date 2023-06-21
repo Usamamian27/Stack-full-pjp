@@ -17,7 +17,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "classnames": "^2.2.6",
-    "concurrently": "^4.1.0",
+    "concurrently": "^6.2.2",
     "express": "^4.16.4",
     "gravatar": "^1.6.0",
     "jsonwebtoken": "^8.3.0",
